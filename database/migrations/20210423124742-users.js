@@ -10,8 +10,19 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
+      personId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'people',
+          key: 'id',
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      },
       login: {
         type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
       },
       password: {
