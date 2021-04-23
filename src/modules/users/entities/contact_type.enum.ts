@@ -1,0 +1,8 @@
+export enum ContactType {
+  FIXO = 'FIXO',
+  CELULAR = 'CELULAR',
+  FACEBOOK = 'FACEBOOK',
+  LINKEDIN = 'LINKEDIN',
+  TWITTER = 'TWITTER',
+  INSTAGRAM = 'INSTAGRAM',
+}
