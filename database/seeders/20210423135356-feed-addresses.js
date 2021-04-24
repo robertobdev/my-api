@@ -14,10 +14,10 @@ module.exports = {
             neighborhood: 'São Gonçalo',
             city: 'Salvador',
             state: 'BA',
-            personId: 1,
+            person_id: 1,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -27,10 +27,10 @@ module.exports = {
             neighborhood: 'Jaqueira',
             city: 'Tucuruí',
             state: 'PA',
-            personId: 2,
+            person_id: 2,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -40,10 +40,10 @@ module.exports = {
             neighborhood: 'Mauazinho',
             city: 'Manaus',
             state: 'AM',
-            personId: 3,
+            person_id: 3,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -53,10 +53,10 @@ module.exports = {
             neighborhood: 'Zélia Barbosa Rocha',
             city: 'Arapiraca',
             state: 'AL',
-            personId: 4,
+            person_id: 4,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -66,10 +66,10 @@ module.exports = {
             neighborhood: 'Boqueirão',
             city: 'Guarapuava',
             state: 'PR',
-            personId: 5,
+            person_id: 5,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -79,10 +79,10 @@ module.exports = {
             neighborhood: 'Parque Piauí',
             city: 'Timon',
             state: 'MA',
-            personId: 6,
+            person_id: 6,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -92,10 +92,10 @@ module.exports = {
             neighborhood: 'Loteamento Campo Bello',
             city: 'Gurupi',
             state: 'TO',
-            personId: 7,
+            person_id: 7,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -105,10 +105,10 @@ module.exports = {
             neighborhood: 'Coophatrabalho',
             city: 'Campo Grande',
             state: 'MS',
-            personId: 8,
+            person_id: 8,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -118,10 +118,10 @@ module.exports = {
             neighborhood: 'Centro',
             city: 'Paulista',
             state: 'PE',
-            personId: 9,
+            person_id: 9,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -131,10 +131,10 @@ module.exports = {
             neighborhood: 'Núcleo Residencial Porto Seguro',
             city: 'Itatiba',
             state: 'SP',
-            personId: 10,
+            person_id: 10,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -144,10 +144,10 @@ module.exports = {
             neighborhood: 'Itaquera',
             city: 'São Paulo',
             state: 'SP',
-            personId: 11,
+            person_id: 11,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -157,10 +157,10 @@ module.exports = {
             neighborhood: 'Boa União',
             city: 'Rio Branco',
             state: 'AC',
-            personId: 12,
+            person_id: 12,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -170,10 +170,10 @@ module.exports = {
             neighborhood: 'Manoel Müller',
             city: 'Rolândia',
             state: 'PR',
-            personId: 13,
+            person_id: 13,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -183,10 +183,10 @@ module.exports = {
             neighborhood: 'Jardim Copacabana',
             city: 'Aparecida de Goiânia',
             state: 'GO',
-            personId: 14,
+            person_id: 14,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
 
           {
@@ -196,10 +196,10 @@ module.exports = {
             neighborhood: 'Morada Nova',
             city: 'Uberlândia',
             state: 'MG',
-            personId: 15,
+            person_id: 15,
             country: 'BRAZIL',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
         ],
 

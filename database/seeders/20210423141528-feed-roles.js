@@ -10,20 +10,20 @@ module.exports = {
           {
             id: 1,
             description: 'ADMIN',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             id: 2,
             description: 'MANAGER',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             id: 3,
             description: 'CLIENT',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
         ],
         {

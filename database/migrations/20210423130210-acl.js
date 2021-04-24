@@ -10,7 +10,7 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
-      roleId: {
+      role_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -20,7 +20,7 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade',
       },
-      moduleId: {
+      module_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -56,11 +56,11 @@ module.exports = {
         defaultValue: true,
         allowNull: false,
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },

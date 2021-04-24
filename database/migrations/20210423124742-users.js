@@ -10,7 +10,7 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
-      personId: {
+      person_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -33,11 +33,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },

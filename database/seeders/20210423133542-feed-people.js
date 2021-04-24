@@ -15,8 +15,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Manager',
@@ -26,8 +26,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Manager 2',
@@ -37,8 +37,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Betina Camila da Cruz',
@@ -48,8 +48,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Fernando Pietro Nelson Assis',
@@ -59,8 +59,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Levi Lorenzo Ramos',
@@ -70,8 +70,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Hadassa Rebeca Alice Corte Real',
@@ -81,8 +81,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Isabela Adriana Carvalho',
@@ -92,8 +92,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Jéssica Luzia Teixeira',
@@ -103,8 +103,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Marcos Vinicius Kaique Gael Fernandes',
@@ -114,8 +114,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Jorge Marcos Martins',
@@ -125,8 +125,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Vitória Beatriz Daniela Pires',
@@ -136,8 +136,8 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Edson Marcos Kaique Lopes',
@@ -147,8 +147,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Enzo Joaquim Erick Drumond',
@@ -159,8 +159,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
           {
             name: 'Alexandre Osvaldo Manuel Carvalho',
@@ -170,8 +170,8 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            created_at: new Date(),
+            updated_at: new Date(),
           },
         ],
 
