@@ -1,6 +1,7 @@
 import { Body, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
+import { HttpResponse } from 'src/utils/http-response';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { Address } from './entities/address.entity';
@@ -28,11 +29,11 @@ export class UsersService {
       person.user.addRoles(createPersonDto.user.roles);
 
       await transaction.commit();
-      return person;
+
+      return true;
     } catch (error) {
       await transaction.rollback();
-      console.log(error);
-      return 'This action adds a new user';
+      throw HttpResponse.unprocessableEntity('Erro ao salvar usuário!');
     }
   }
 
@@ -40,8 +41,8 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.personModel.findByPk(id, { raw: true, nest: true });
   }
 
   update(id: number, updatePersonDto: UpdatePersonDto) {

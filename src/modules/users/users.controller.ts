@@ -8,16 +8,18 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
+import { HttpResponse } from 'src/utils/http-response';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createPersonDto: CreatePersonDto) {
+    await this.usersService.create(createPersonDto);
+    return HttpResponse.created('Usuário criado com sucesso!');
   }
 
   @Get()
@@ -31,8 +33,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
+    return this.usersService.update(+id, updatePersonDto);
   }
 
   @Delete(':id')
