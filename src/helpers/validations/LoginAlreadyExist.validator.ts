@@ -5,34 +5,35 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { Person } from 'src/modules/users/entities/person.entity';
+import { User } from 'src/modules/users/entities/user.entity';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
-export class CpfAlreadyExistConstraint implements ValidatorConstraintInterface {
+export class LoginAlreadyExistConstraint
+  implements ValidatorConstraintInterface {
   constructor(
-    @Inject('PERSON_REPOSITORY')
-    private personRepository: typeof Person,
+    @Inject('USER_REPOSITORY')
+    private user: typeof User,
   ) {}
 
-  async validate(cpf: string) {
+  async validate(login: string) {
     try {
-      const person = await this.personRepository.findOne({ where: { cpf } });
-      return !!!person;
+      const user = await this.user.findOne({ where: { login } });
+      return !!!user;
     } catch (e) {
       return false;
     }
   }
 }
 
-export function CpfAlreadyExist(validationOptions?: ValidationOptions) {
+export function LoginAlreadyExist(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: CpfAlreadyExistConstraint,
+      validator: LoginAlreadyExistConstraint,
     });
   };
 }

@@ -9,15 +9,16 @@ import { Person } from 'src/modules/users/entities/person.entity';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
-export class CpfAlreadyExistConstraint implements ValidatorConstraintInterface {
+export class EmailAlreadyExistConstraint
+  implements ValidatorConstraintInterface {
   constructor(
     @Inject('PERSON_REPOSITORY')
     private personRepository: typeof Person,
   ) {}
 
-  async validate(cpf: string) {
+  async validate(email: string) {
     try {
-      const person = await this.personRepository.findOne({ where: { cpf } });
+      const person = await this.personRepository.findOne({ where: { email } });
       return !!!person;
     } catch (e) {
       return false;
@@ -25,14 +26,14 @@ export class CpfAlreadyExistConstraint implements ValidatorConstraintInterface {
   }
 }
 
-export function CpfAlreadyExist(validationOptions?: ValidationOptions) {
+export function EmailAlreadyExist(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: CpfAlreadyExistConstraint,
+      validator: EmailAlreadyExistConstraint,
     });
   };
 }
