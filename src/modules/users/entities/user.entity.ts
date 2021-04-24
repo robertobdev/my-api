@@ -1,6 +1,7 @@
 import {
   AllowNull,
   AutoIncrement,
+  BeforeCreate,
   BelongsTo,
   BelongsToMany,
   Column,
@@ -16,8 +17,9 @@ import {
 import { Person } from './person.entity';
 import { RoleUser } from './role-user.entity';
 import { Role } from './role.entity';
-
-@Table({ tableName: 'Users' })
+import { hash } from 'bcrypt';
+import { Exclude } from 'class-transformer';
+@Table({ tableName: 'users' })
 export class User extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -46,6 +48,7 @@ export class User extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @AllowNull(true)
@@ -62,4 +65,9 @@ export class User extends Model {
   @UpdatedAt
   @Column({ type: DataType.DATE, field: 'updated_at' })
   updatedAt: Date;
+
+  @BeforeCreate
+  static async hashPassword(instance: User) {
+    instance.password = await hash(instance.password, 10);
+  }
 }
