@@ -12,19 +12,20 @@ import {
   HasMany,
   HasOne,
 } from 'sequelize-typescript';
+import { Person as IPerson } from '../users.interface';
 import { Address } from './address.entity';
 import { Contact } from './contact.entity';
 import { GENDER } from './gender.enum';
 import { User } from './user.entity';
 
 @Table({ tableName: 'people' })
-export class Person extends Model<Person> {
+export class Person extends Model<IPerson> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  id: number;
+  id?: number;
 
   @AllowNull(false)
   @Column(DataType.STRING)
@@ -56,14 +57,14 @@ export class Person extends Model<Person> {
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdatedAt
   @Column({ type: DataType.DATE, field: 'updated_at' })
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @HasOne(() => User, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  user: User;
+  user?: User;
 
   @HasMany(() => Address, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   addresses: Address[];

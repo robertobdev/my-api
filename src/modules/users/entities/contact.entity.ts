@@ -7,12 +7,12 @@ import {
   Unique,
   PrimaryKey,
   AutoIncrement,
-  UpdatedAt,
-  CreatedAt,
   ForeignKey,
   BelongsTo,
+  UpdatedAt,
+  CreatedAt,
 } from 'sequelize-typescript';
-import { ContactType } from './contact_type.enum';
+import { CONTACTYPE } from './contact_type.enum';
 import { Person } from './person.entity';
 
 @Table({ tableName: 'contacts' })
@@ -25,12 +25,12 @@ export class Contact extends Model<Contact> {
   id: number;
 
   @ForeignKey(() => Person)
-  @Column
+  @Column({ field: 'person_id' })
   personId: number;
 
   @BelongsTo(() => Person, {
     foreignKey: {
-      name: 'personId',
+      name: 'person_id',
     },
     onDelete: 'cascade',
     onUpdate: 'cascade',
@@ -40,16 +40,16 @@ export class Contact extends Model<Contact> {
   @AllowNull(false)
   @Column({
     type: DataType.ENUM(
-      ContactType.FIXO,
-      ContactType.CELULAR,
-      ContactType.FACEBOOK,
-      ContactType.LINKEDIN,
-      ContactType.TWITTER,
-      ContactType.INSTAGRAM,
+      CONTACTYPE.FIXO,
+      CONTACTYPE.CELULAR,
+      CONTACTYPE.FACEBOOK,
+      CONTACTYPE.LINKEDIN,
+      CONTACTYPE.TWITTER,
+      CONTACTYPE.INSTAGRAM,
     ),
     field: 'contact_type',
   })
-  contactType: ContactType;
+  contactType: CONTACTYPE;
 
   @AllowNull(false)
   @Column(DataType.STRING)
@@ -61,9 +61,9 @@ export class Contact extends Model<Contact> {
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdatedAt
   @Column({ type: DataType.DATE, field: 'updated_at' })
-  updatedAt: Date;
+  updated_at: Date;
 }

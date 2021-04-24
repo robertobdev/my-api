@@ -2,6 +2,7 @@ import {
   AllowNull,
   AutoIncrement,
   BelongsTo,
+  BelongsToMany,
   Column,
   CreatedAt,
   DataType,
@@ -13,6 +14,8 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import { Person } from './person.entity';
+import { RoleUser } from './role-user.entity';
+import { Role } from './role.entity';
 
 @Table({ tableName: 'Users' })
 export class User extends Model {
@@ -24,7 +27,7 @@ export class User extends Model {
   id: number;
 
   @ForeignKey(() => Person)
-  @Column
+  @Column({ type: DataType.NUMBER, field: 'person_id' })
   personId: number;
 
   @BelongsTo(() => Person, {
@@ -44,6 +47,13 @@ export class User extends Model {
   @AllowNull(false)
   @Column(DataType.STRING)
   password: string;
+
+  @AllowNull(true)
+  @Column(DataType.STRING)
+  token: string;
+
+  @BelongsToMany(() => Role, () => RoleUser)
+  roles: Role[];
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })

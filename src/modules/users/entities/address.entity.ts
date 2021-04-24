@@ -24,12 +24,12 @@ export class Address extends Model<Address> {
   id: number;
 
   @ForeignKey(() => Person)
-  @Column
+  @Column({ field: 'person_id' })
   personId: number;
 
   @BelongsTo(() => Person, {
     foreignKey: {
-      name: 'personId',
+      name: 'person_id',
     },
     onDelete: 'cascade',
     onUpdate: 'cascade',
