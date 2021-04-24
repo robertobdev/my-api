@@ -1,8 +1,8 @@
 import { Body, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
 import { Address } from './entities/address.entity';
 import { Contact } from './entities/contact.entity';
 import { Person } from './entities/person.entity';
@@ -15,14 +15,18 @@ export class UsersService {
     private sequelize: Sequelize,
   ) {}
 
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createPersonDto: CreatePersonDto) {
     const transaction = await this.sequelize.transaction();
     try {
-      const person = await this.personModel.create(createUserDto, {
+      const person = await this.personModel.create(createPersonDto, {
         include: [Address, Contact, User],
         transaction,
       });
-      // person.user.addRole()
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      person.user.addRoles(createPersonDto.user.roles);
+
       await transaction.commit();
       return person;
     } catch (error) {
@@ -40,7 +44,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updatePersonDto: UpdatePersonDto) {
     return `This action updates a #${id} user`;
   }
 
