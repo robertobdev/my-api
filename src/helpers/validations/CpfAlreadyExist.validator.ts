@@ -4,7 +4,6 @@ import {
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
-  ValidationArguments,
 } from 'class-validator';
 import { Person } from 'src/modules/users/entities/person.entity';
 
@@ -16,11 +15,13 @@ export class CpfAlreadyExistConstraint implements ValidatorConstraintInterface {
     private personRepository: typeof Person,
   ) {}
 
-  validate(cpf: string) {
-    return this.personRepository.findOne({ where: { cpf } }).then((person) => {
-      if (person) return false;
-      return true;
-    });
+  async validate(cpf: string) {
+    try {
+      const person = await this.personRepository.findOne({ where: { cpf } });
+      return !!person;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
