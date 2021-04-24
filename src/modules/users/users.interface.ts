@@ -15,9 +15,9 @@ export interface Person {
 
   user?: any;
 
-  addresses: any[];
+  addresses?: any[];
 
-  contacts: any[];
+  contacts?: any[];
 
   createAt?: any;
 
