@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import * as dotenv from 'dotenv';
-import { AlreadyExistConstraint } from './helpers/validations/alreadyExist.validator';
 dotenv.config();
 @Module({
   imports: [
@@ -21,6 +20,6 @@ dotenv.config();
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AlreadyExistConstraint],
+  providers: [AppService],
 })
 export class AppModule {}
