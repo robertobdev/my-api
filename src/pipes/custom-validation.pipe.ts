@@ -4,7 +4,7 @@ import {
   UnprocessableEntityException,
   ValidationPipe,
 } from '@nestjs/common';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../utils/http-response';
 
 export class CustomValidationPipe extends ValidationPipe {
   public async transform(value: any, metadata: ArgumentMetadata): Promise<any> {

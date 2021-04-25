@@ -1,4 +1,4 @@
-import { Person } from 'src/modules/users/entities/person.entity';
+import { Person } from '../modules/users/entities/person.entity';
 
 export const personProviders = [
   {
