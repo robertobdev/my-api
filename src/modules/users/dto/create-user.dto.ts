@@ -1,5 +1,5 @@
 import { IsNotEmpty, MinLength, ArrayNotEmpty, IsArray } from 'class-validator';
-import { LoginAlreadyExist } from 'src/helpers/validations';
+import { LoginAlreadyExist } from '../../../helpers/validations';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
   @ApiProperty({ example: 'julio@email.com' })

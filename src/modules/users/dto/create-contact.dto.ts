@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsString, IsEnum, IsOptional } from 'class-validator';
 import { CONTACTYPE } from '../interfaces/contact_type.enum';
-
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateContactDto {

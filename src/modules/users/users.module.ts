@@ -6,15 +6,15 @@ import { User } from './entities/user.entity';
 import { Person } from './entities/person.entity';
 import { Address } from './entities/address.entity';
 import { Contact } from './entities/contact.entity';
-import { personProviders } from 'src/providers/person.providers';
+import { personProviders } from '../../providers/person.providers';
 import {
   CpfAlreadyExistConstraint,
   EmailAlreadyExistConstraint,
   LoginAlreadyExistConstraint,
-} from 'src/helpers/validations';
+} from '../../helpers/validations';
 import { Role } from './entities/role.entity';
 import { RoleUser } from './entities/role-user.entity';
-import { userProviders } from 'src/providers/user.providers';
+import { userProviders } from '../../providers/user.providers';
 
 @Module({
   imports: [
@@ -30,11 +30,11 @@ import { userProviders } from 'src/providers/user.providers';
   controllers: [UsersController],
   providers: [
     UsersService,
-    ...personProviders,
-    ...userProviders,
     CpfAlreadyExistConstraint,
     EmailAlreadyExistConstraint,
     LoginAlreadyExistConstraint,
+    ...personProviders,
+    ...userProviders,
   ],
   exports: [UsersService],
 })

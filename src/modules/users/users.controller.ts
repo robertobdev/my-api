@@ -10,7 +10,7 @@ import {
 import { UsersService } from './users.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import {
   ApiBody,
   ApiCreatedResponse,
