@@ -11,13 +11,22 @@ import { UsersService } from './users.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { HttpResponse } from 'src/utils/http-response';
-import { ApiBody } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+} from '@nestjs/swagger';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
   @ApiBody({ type: CreatePersonDto })
+  @ApiCreatedResponse({ description: 'Create a person' })
+  @ApiBadRequestResponse({
+    status: 422,
+    description: 'Error to create a person',
+  })
   async create(@Body() createPersonDto: CreatePersonDto) {
     await this.usersService.create(createPersonDto);
     return HttpResponse.created('Usuário criado com sucesso!');
