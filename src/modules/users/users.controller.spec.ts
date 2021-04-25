@@ -7,8 +7,19 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [],
       controllers: [UsersController],
-      providers: [UsersService],
+      providers: [
+        {
+          provide: UsersService,
+          useValue: {
+            getCats: jest.fn(() => []),
+            addCat: jest.fn(() => {
+              a: '1';
+            }),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
