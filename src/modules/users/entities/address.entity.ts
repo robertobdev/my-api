@@ -13,9 +13,9 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import { Person } from './person.entity';
-
+import { Address as IAddress } from '../interfaces';
 @Table({ tableName: 'addresses' })
-export class Address extends Model<Address> {
+export class Address extends Model<IAddress> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)

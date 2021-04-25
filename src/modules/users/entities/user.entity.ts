@@ -19,8 +19,9 @@ import { RoleUser } from './role-user.entity';
 import { Role } from './role.entity';
 import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
+import { User as IUser } from '../interfaces';
 @Table({ tableName: 'users' })
-export class User extends Model {
+export class User extends Model<IUser> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)

@@ -12,10 +12,9 @@ import {
   HasMany,
   HasOne,
 } from 'sequelize-typescript';
-import { Person as IPerson } from '../users.interface';
 import { Address } from './address.entity';
 import { Contact } from './contact.entity';
-import { GENDER } from './gender.enum';
+import { Person as IPerson, GENDER } from '../interfaces/';
 import { User } from './user.entity';
 
 @Table({ tableName: 'people' })
@@ -70,5 +69,5 @@ export class Person extends Model<IPerson> {
   addresses: Address[];
 
   @HasMany(() => Contact, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  contracts: Contact[];
+  contacts: Contact[];
 }

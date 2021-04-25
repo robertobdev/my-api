@@ -12,11 +12,11 @@ import {
   UpdatedAt,
   CreatedAt,
 } from 'sequelize-typescript';
-import { CONTACTYPE } from './contact_type.enum';
+import { CONTACTYPE } from '../interfaces/contact_type.enum';
 import { Person } from './person.entity';
-
+import { Contact as IContact } from '../interfaces';
 @Table({ tableName: 'contacts' })
-export class Contact extends Model<Contact> {
+export class Contact extends Model<IContact> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)
