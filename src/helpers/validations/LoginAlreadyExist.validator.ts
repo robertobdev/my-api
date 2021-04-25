@@ -5,7 +5,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { User } from 'src/modules/users/entities/user.entity';
+import { User } from '../../modules/users/entities/user.entity';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
