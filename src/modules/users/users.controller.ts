@@ -43,8 +43,12 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
-    return this.usersService.update(+id, updatePersonDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updatePersonDto: UpdatePersonDto,
+  ) {
+    await this.usersService.update(+id, updatePersonDto);
+    return HttpResponse.ok('Usuário atualizado com sucesso!');
   }
 
   @Delete(':id')
