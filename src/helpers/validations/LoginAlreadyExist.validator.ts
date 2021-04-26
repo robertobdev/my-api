@@ -1,12 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import {
   registerDecorator,
+  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { User } from '../../modules/users/entities/user.entity';
-
+import { Op } from 'sequelize';
+import { Person } from 'src/modules/users/entities/person.entity';
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class LoginAlreadyExistConstraint
@@ -16,9 +18,15 @@ export class LoginAlreadyExistConstraint
     private user: typeof User,
   ) {}
 
-  async validate(login: string) {
+  async validate(login: string, validationArguments: ValidationArguments) {
+    let { id } = validationArguments.object as Person;
+    if (!id) {
+      id = 0;
+    }
     try {
-      const user = await this.user.findOne({ where: { login } });
+      const user = await this.user.findOne({
+        where: { login, personId: { [Op.not]: id } },
+      });
       return !!!user;
     } catch (e) {
       return false;
