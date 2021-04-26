@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 const ENV = process.env.NODE_ENV;
 
 @Module({
@@ -11,6 +12,12 @@ const ENV = process.env.NODE_ENV;
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
+    }),
+    GraphQLModule.forRoot({
+      debug: process.env.GRAPHQL_DEBUG === 'true',
+      playground: process.env.GRAPHQL_DEBUG === 'true',
+      installSubscriptionHandlers: true,
+      autoSchemaFile: 'schema.gql',
     }),
     SequelizeModule.forRoot({
       dialect: 'mysql',

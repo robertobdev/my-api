@@ -15,6 +15,7 @@ import {
 import { Role } from './entities/role.entity';
 import { RoleUser } from './entities/role-user.entity';
 import { userProviders } from '../../providers/user.providers';
+import { UsersResolver } from './users.resolver';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { userProviders } from '../../providers/user.providers';
     CpfAlreadyExistConstraint,
     EmailAlreadyExistConstraint,
     LoginAlreadyExistConstraint,
+    UsersResolver,
     ...personProviders,
     ...userProviders,
   ],

@@ -15,6 +15,9 @@ import {
 import { CONTACTYPE } from '../interfaces/contact_type.enum';
 import { Person } from './person.entity';
 import { Contact as IContact } from '../interfaces';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
+@ObjectType()
 @Table({ tableName: 'contacts' })
 export class Contact extends Model<IContact> {
   @PrimaryKey
@@ -22,10 +25,12 @@ export class Contact extends Model<IContact> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
+  @Field((type) => Int)
   id: number;
 
   @ForeignKey(() => Person)
   @Column({ field: 'person_id' })
+  @Field((type) => Int)
   personId: number;
 
   @BelongsTo(() => Person, {
@@ -35,6 +40,7 @@ export class Contact extends Model<IContact> {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
+  @Field((type) => Person)
   person: Person;
 
   @AllowNull(false)
@@ -49,21 +55,26 @@ export class Contact extends Model<IContact> {
     ),
     field: 'contact_type',
   })
+  @Field()
   contactType: CONTACTYPE;
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  @Field()
   value: string;
 
   @AllowNull(true)
   @Column(DataType.STRING)
+  @Field({ nullable: true })
   complement: string;
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
+  @Field()
   created_at: Date;
 
   @UpdatedAt
   @Column({ type: DataType.DATE, field: 'updated_at' })
+  @Field()
   updated_at: Date;
 }

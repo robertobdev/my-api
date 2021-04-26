@@ -41,12 +41,16 @@ export class UsersService {
     }
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.personModel.findAll({
+      include: [Address, Contact, User],
+    });
   }
 
   async findOne(id: number) {
-    return await this.personModel.findByPk(id, { raw: true, nest: true });
+    return await this.personModel.findByPk(id, {
+      include: [Address, Contact, User],
+    });
   }
 
   async update(id: number, updatePersonDto: UpdatePersonDto) {
