@@ -14,12 +14,12 @@ import {
   Unique,
   UpdatedAt,
 } from 'sequelize-typescript';
-import { Person } from './person.entity';
+import { Person } from '../../people/entities/person.entity';
 import { RoleUser } from './role-user.entity';
 import { Role } from './role.entity';
 import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { User as IUser } from '../interfaces';
+import { User as IUser } from '../../people/interfaces';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
@@ -56,7 +56,7 @@ export class User extends Model<IUser> {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   password: string;
 
   @AllowNull(true)

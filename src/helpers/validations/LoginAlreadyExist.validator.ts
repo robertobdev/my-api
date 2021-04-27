@@ -6,7 +6,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { User } from '../../modules/people/entities/user.entity';
+import { User } from '../../modules/users/entities/user.entity';
 import { Op } from 'sequelize';
 import { Person } from 'src/modules/people/entities/person.entity';
 @ValidatorConstraint({ async: true })

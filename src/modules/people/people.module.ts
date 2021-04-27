@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PeopleService } from './people.service';
 import { PeopleController } from './people.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { Person } from './entities/person.entity';
 import { Address } from './entities/address.entity';
 import { Contact } from './entities/contact.entity';
@@ -12,8 +12,8 @@ import {
   EmailAlreadyExistConstraint,
   LoginAlreadyExistConstraint,
 } from '../../helpers/validations';
-import { Role } from './entities/role.entity';
-import { RoleUser } from './entities/role-user.entity';
+import { Role } from '../users/entities/role.entity';
+import { RoleUser } from '../users/entities/role-user.entity';
 import { userProviders } from '../../providers/user.providers';
 import { PeopleResolver } from './people.resolver';
 

@@ -16,7 +16,7 @@ import {
 import { GENDER } from '../interfaces/gender.enum';
 import { CreateAddressDto } from './create-address.dto';
 import { CreateContactDto } from './create-contact.dto';
-import { CreateUserDto } from './create-user.dto';
+import { CreateUserDto } from '../../users/dto/create-user.dto';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreatePersonDto {
   @ApiProperty({ example: 'Julio Eduardo Joaquim Lima' })

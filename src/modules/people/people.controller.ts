@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PeopleService } from './people.service';
 import { CreatePersonDto } from './dto/create-person.dto';
@@ -16,6 +17,8 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('people')
 export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
@@ -38,6 +41,7 @@ export class PeopleController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.peopleService.findOne(+id);
   }
