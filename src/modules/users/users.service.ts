@@ -2,6 +2,7 @@ import { Body, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { HttpResponse } from '../../utils/http-response';
+import { PaginationDB } from '../shared/interfaces/pagination.interface';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { Address } from './entities/address.entity';
@@ -41,10 +42,13 @@ export class UsersService {
     }
   }
 
-  async findAll() {
-    return await this.personModel.findAll({
+  async findAll({ limit, offset }: PaginationDB) {
+    const people = await this.personModel.findAndCountAll({
       include: [Address, Contact, User],
+      limit,
+      offset,
     });
+    return people;
   }
 
   async findOne(id: number) {

@@ -69,7 +69,24 @@ type Person {
   contacts: [Contact!]!
 }
 
+type PersonEdge {
+  cursor: String!
+  node: Person!
+}
+
+type PersonResponse {
+  edges: [PersonEdge!]
+  nodes: [Person!]
+  totalCount: Int!
+  hasNextPage: Boolean
+}
+
 type Query {
-  people: [Person!]!
+  people(paginate: Pagination!): PersonResponse!
   person(id: Int!): Person!
+}
+
+input Pagination {
+  limit: Int = 10
+  page: Int!
 }

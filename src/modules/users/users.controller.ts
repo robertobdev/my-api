@@ -34,7 +34,7 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findAll({ limit: 0, offset: 10 });
   }
 
   @Get(':id')
