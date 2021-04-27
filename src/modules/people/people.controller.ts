@@ -19,6 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Acl } from '../shared/decorators/acl.decorator';
 @Controller('people')
 export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
@@ -42,6 +43,7 @@ export class PeopleController {
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
+  @Acl('PEOPLE_GET')
   findOne(@Param('id') id: string) {
     return this.peopleService.findOne(+id);
   }

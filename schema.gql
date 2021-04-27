@@ -34,10 +34,36 @@ type Contact {
   updated_at: DateTime!
 }
 
+type Modules {
+  id: Int!
+  acl: Acl!
+  title: String!
+  router: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Acl {
+  id: Int!
+  roleId: Int!
+  role: Role!
+  moduleId: Int!
+  module: Modules!
+  isShow: Boolean!
+  isGet: Boolean!
+  isPost: Boolean!
+  isUpdate: Boolean!
+  isDelete: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Role {
-  id: String!
+  id: Int!
   description: String!
   users: [User!]!
+  acl: Acl!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

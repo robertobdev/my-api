@@ -30,28 +30,28 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade',
       },
-      show: {
+      is_show: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false,
       },
-      get: {
+      is_get: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false,
       },
-      post: {
+      is_post: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false,
       },
-      update: {
+      is_update: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false,
         comment: 'ITS MEANS PUT AND PATCH HTTP METHOD',
       },
-      delete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
         allowNull: false,

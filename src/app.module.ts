@@ -7,9 +7,8 @@ import { PeopleModule } from './modules/people/people.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { AclModule } from './modules/acl/acl.module';
 const ENV = process.env.NODE_ENV;
-
-console.log('DEBUG', process.env.GRAPHQL_DEBUG);
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -35,6 +34,7 @@ console.log('DEBUG', process.env.GRAPHQL_DEBUG);
     PeopleModule,
     UsersModule,
     AuthModule,
+    AclModule,
   ],
   controllers: [AppController],
   providers: [AppService],

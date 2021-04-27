@@ -1,5 +1,4 @@
 import {
-  Model,
   AllowNull,
   Column,
   Table,
@@ -9,18 +8,18 @@ import {
   AutoIncrement,
   UpdatedAt,
   CreatedAt,
-  BelongsToMany,
+  ForeignKey,
+  BelongsTo,
+  Model,
   HasOne,
-  HasMany,
 } from 'sequelize-typescript';
-import { RoleUser } from './role-user.entity';
-import { User } from './user.entity';
+import { Role } from 'src/modules/users/entities/role.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Acl } from '../../acl/entities/acl.entity';
+import { Acl } from './acl.entity';
 
 @ObjectType()
-@Table({ tableName: 'roles' })
-export class Role extends Model<Role> {
+@Table({ tableName: 'modules' })
+export class Modules extends Model<Modules> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)
@@ -29,18 +28,24 @@ export class Role extends Model<Role> {
   @Field((type) => Int)
   id: number;
 
+  @HasOne(() => Acl, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @Field((type) => Acl)
+  acl?: Acl;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  title: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  router: string;
+
   @AllowNull(false)
   @Column(DataType.STRING)
   @Field()
   description: string;
-
-  @BelongsToMany(() => User, () => RoleUser)
-  @Field((type) => [User])
-  users: User[];
-
-  @HasMany(() => Acl, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => Acl)
-  acl?: Acl[];
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
