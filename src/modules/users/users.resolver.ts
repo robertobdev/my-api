@@ -24,11 +24,11 @@ export class UsersResolver {
       limit,
       offset,
     });
-    const totalPage = count / limit;
+    const totalPage = Math.floor(count / limit);
     return {
       totalCount: count,
       nodes: people,
-      hasNextPage: totalPage >= page,
+      hasNextPage: totalPage > page,
     };
   }
 

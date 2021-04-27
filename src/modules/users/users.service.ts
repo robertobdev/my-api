@@ -45,6 +45,7 @@ export class UsersService {
   async findAll({ limit, offset }: PaginationDB) {
     const people = await this.personModel.findAndCountAll({
       include: [Address, Contact, User],
+      distinct: true,
       limit,
       offset,
     });

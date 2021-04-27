@@ -57,7 +57,6 @@ export class User extends Model<IUser> {
   @AllowNull(false)
   @Column(DataType.STRING)
   @Exclude({ toPlainOnly: true })
-  @Field()
   password: string;
 
   @AllowNull(true)
