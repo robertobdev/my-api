@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './modules/auth/auth.module';
 const ENV = process.env.NODE_ENV;
 
 @Module({
@@ -30,6 +31,7 @@ const ENV = process.env.NODE_ENV;
       synchronize: false,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
