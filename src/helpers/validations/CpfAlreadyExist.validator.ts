@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Op } from 'sequelize';
 
-import { Person } from '../../modules/users/entities/person.entity';
+import { Person } from '../../modules/people/entities/person.entity';
 
 @ValidatorConstraint({ async: true })
 @Injectable()

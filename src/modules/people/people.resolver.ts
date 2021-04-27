@@ -1,17 +1,17 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { Person } from './entities/person.entity';
-import { UsersService } from './users.service';
+import { PeopleService } from './people.service';
 import { Pagination } from '../shared/interfaces/pagination.input';
 import {
   PaginationInputGraphql,
   PaginationResolveGraphql,
-} from './../shared/interfaces/pagination.interface';
+} from '../shared/interfaces/pagination.interface';
 import PersonResponse from './person.response';
 
 @Resolver()
-export class UsersResolver {
+export class PeopleResolver {
   LIMIT_PER_PAGE = 10;
-  constructor(private readonly userservice: UsersService) {}
+  constructor(private readonly peoplService: PeopleService) {}
 
   @Query(() => PersonResponse)
   async people(
@@ -20,7 +20,7 @@ export class UsersResolver {
   ): Promise<PaginationResolveGraphql<Person>> {
     const { limit = this.LIMIT_PER_PAGE, page } = paginate;
     const offset = (page - 1) * limit;
-    const { count, rows: people } = await this.userservice.findAll({
+    const { count, rows: people } = await this.peoplService.findAll({
       limit,
       offset,
     });
@@ -34,6 +34,6 @@ export class UsersResolver {
 
   @Query(() => Person)
   async person(@Args('id', { type: () => Int }) id: number) {
-    return this.userservice.findOne(id);
+    return this.peoplService.findOne(id);
   }
 }

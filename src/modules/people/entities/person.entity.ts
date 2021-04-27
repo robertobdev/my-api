@@ -14,7 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { Address } from './address.entity';
 import { Contact } from './contact.entity';
-import { Person as IPerson, GENDER } from '../interfaces/';
+import { Person as IPerson, GENDER } from '../interfaces';
 import { User } from './user.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()

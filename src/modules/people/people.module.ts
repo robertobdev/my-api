@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
+import { PeopleService } from './people.service';
+import { PeopleController } from './people.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './entities/user.entity';
 import { Person } from './entities/person.entity';
@@ -15,7 +15,7 @@ import {
 import { Role } from './entities/role.entity';
 import { RoleUser } from './entities/role-user.entity';
 import { userProviders } from '../../providers/user.providers';
-import { UsersResolver } from './users.resolver';
+import { PeopleResolver } from './people.resolver';
 
 @Module({
   imports: [
@@ -28,16 +28,16 @@ import { UsersResolver } from './users.resolver';
       RoleUser,
     ]),
   ],
-  controllers: [UsersController],
+  controllers: [PeopleController],
   providers: [
-    UsersService,
+    PeopleService,
     CpfAlreadyExistConstraint,
     EmailAlreadyExistConstraint,
     LoginAlreadyExistConstraint,
-    UsersResolver,
+    PeopleResolver,
     ...personProviders,
     ...userProviders,
   ],
-  exports: [UsersService],
+  exports: [PeopleService],
 })
-export class UsersModule {}
+export class PeopleModule {}

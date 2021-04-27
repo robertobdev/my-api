@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
+import { PeopleService } from './people.service';
 import { getModelToken } from '@nestjs/sequelize';
 import { Person } from './entities/person.entity';
 import { Sequelize } from 'sequelize-typescript';
 
-describe('UsersService', () => {
-  let service: UsersService;
+describe('PeopleService', () => {
+  let service: PeopleService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UsersService,
+        PeopleService,
         {
           provide: getModelToken(Person),
           useValue: {
@@ -29,7 +29,7 @@ describe('UsersService', () => {
       ],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    service = module.get<PeopleService>(PeopleService);
   });
 
   it('should be defined', () => {

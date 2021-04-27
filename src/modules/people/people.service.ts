@@ -12,7 +12,7 @@ import { User } from './entities/user.entity';
 import { Contact as IContact } from './interfaces/contact.interface';
 
 @Injectable()
-export class UsersService {
+export class PeopleService {
   constructor(
     @InjectModel(Person) private personModel: typeof Person,
     @InjectModel(Contact) private contactsModel: typeof Contact,

@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { PeopleService } from './people.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { HttpResponse } from '../../utils/http-response';
@@ -16,9 +16,9 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
-@Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+@Controller('people')
+export class PeopleController {
+  constructor(private readonly peopleService: PeopleService) {}
 
   @Post()
   @ApiBody({ type: CreatePersonDto })
@@ -28,18 +28,18 @@ export class UsersController {
     description: 'Error to create a person',
   })
   async create(@Body() createPersonDto: CreatePersonDto) {
-    await this.usersService.create(createPersonDto);
+    await this.peopleService.create(createPersonDto);
     return HttpResponse.created('Usuário criado com sucesso!');
   }
 
   @Get()
   findAll() {
-    return this.usersService.findAll({ limit: 0, offset: 10 });
+    return this.peopleService.findAll({ limit: 0, offset: 10 });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.peopleService.findOne(+id);
   }
 
   @Patch(':id')
@@ -47,12 +47,12 @@ export class UsersController {
     @Param('id') id: string,
     @Body() updatePersonDto: UpdatePersonDto,
   ) {
-    await this.usersService.update(+id, updatePersonDto);
+    await this.peopleService.update(+id, updatePersonDto);
     return HttpResponse.ok('Usuário atualizado com sucesso!');
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.peopleService.remove(+id);
   }
 }
