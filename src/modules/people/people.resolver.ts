@@ -7,8 +7,13 @@ import {
   PaginationResolveGraphql,
 } from '../shared/interfaces/pagination.interface';
 import PersonResponse from './person.response';
+import { GqlAuthGuard } from '../shared/guards/graphql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { Acl } from '../shared/decorators/acl.decorator';
+import { AclGuard } from '../shared/guards/acl.guard';
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class PeopleResolver {
   LIMIT_PER_PAGE = 10;
   constructor(private readonly peoplService: PeopleService) {}
