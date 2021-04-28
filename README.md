@@ -1,6 +1,16 @@
-# Prod
+# MyApi
+
 
 # Testing
+
+## OpenApi
+
+This project has OpenApi(Swagger)
+
+```http
+http://localhost:3000/api
+
+```
 
 ### Database
 
