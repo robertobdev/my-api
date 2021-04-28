@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class LoginUserDto {
-  @ApiProperty({ example: 'julio@email.com' })
+  @ApiProperty({ example: 'admin@admin.com' })
   @IsNotEmpty({ message: 'login:Campo obrigatório.' })
   login: string;
 

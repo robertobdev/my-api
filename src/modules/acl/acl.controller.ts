@@ -8,6 +8,12 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiBody,
+  ApiCreatedResponse,
+} from '@nestjs/swagger';
 import { HttpResponse } from 'src/utils/http-response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Acl } from '../shared/decorators/acl.decorator';
@@ -18,10 +24,17 @@ import { CreateAclDto } from './dto/create-acl.dto';
 @Controller('acl')
 @UseGuards(AclGuard)
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class AclController {
   constructor(private readonly aclService: AclService) {}
 
   @Post()
+  @ApiBody({ type: CreateAclDto })
+  @ApiCreatedResponse({ description: 'Create a new acl' })
+  @ApiBadRequestResponse({
+    status: 422,
+    description: 'Error to create a clt',
+  })
   @Acl('POST_USERS')
   async create(@Body() createAclDto: CreateAclDto) {
     await this.aclService.create(createAclDto);
@@ -49,7 +62,8 @@ export class AclController {
 
   @Delete(':id')
   @Acl('DELETE_USERS')
-  remove(@Param('id') id: string) {
-    return this.aclService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.aclService.remove(+id);
+    return HttpResponse.ok('ACL excluida com sucesso!');
   }
 }

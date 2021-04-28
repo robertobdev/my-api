@@ -47,7 +47,14 @@ export class AclService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} acl`;
+  async remove(id: number) {
+    try {
+      const acl = await this.aclModel.findByPk(id);
+      await acl.destroy();
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw HttpResponse.unprocessableEntity('Erro ao excluir acl!');
+    }
   }
 }
