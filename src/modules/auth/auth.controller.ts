@@ -46,9 +46,4 @@ export class AuthController {
       'Se o email estiver correto, a messagem será enviada!',
     );
   }
-  @Get()
-  @UseGuards(JwtAuthGuard)
-  async l() {
-    return 'USER';
-  }
 }
