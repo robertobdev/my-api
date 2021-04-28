@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  ### MySQL ################################################
+  mysql:
+    container_name: mysql
+    build:
+      context: ./scripts/docker/mysql
+      args:
+        - MYSQL_VERSION=${DB_MYSQL_VERSION}
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+      - ${DB_MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    ports:
+      - '${DB_PORT}:3306'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  mysql:
+    driver: ${VOLUMES_DRIVER}
