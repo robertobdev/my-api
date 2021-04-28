@@ -10,7 +10,6 @@ import {
   UpdatedAt,
   CreatedAt,
   BelongsToMany,
-  HasOne,
   HasMany,
 } from 'sequelize-typescript';
 import { RoleUser } from './role-user.entity';
@@ -26,7 +25,7 @@ export class Role extends Model<Role> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @AllowNull(false)
@@ -35,11 +34,11 @@ export class Role extends Model<Role> {
   description: string;
 
   @BelongsToMany(() => User, () => RoleUser)
-  @Field((type) => [User])
+  @Field(() => [User])
   users: User[];
 
   @HasMany(() => Acl, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => Acl)
+  @Field(() => Acl)
   acl?: Acl[];
 
   @CreatedAt

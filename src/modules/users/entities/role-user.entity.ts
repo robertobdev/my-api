@@ -15,12 +15,12 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 export class RoleUser extends Model<RoleUser> {
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, field: 'user_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   userId: number;
 
   @ForeignKey(() => Role)
   @Column({ type: DataType.INTEGER, field: 'role_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   roleId: number;
 
   @CreatedAt

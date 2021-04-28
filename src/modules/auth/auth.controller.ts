@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import {
@@ -13,7 +6,6 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from './jwt-auth.guard';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
 import { HttpResponse } from 'src/utils/http-response';
 
