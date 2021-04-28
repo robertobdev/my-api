@@ -3,11 +3,13 @@ import { AppModule } from './app.module';
 import { useContainer } from 'class-validator';
 import { CustomValidationPipe } from './pipes/custom-validation.pipe';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { CustomExceptionFilter } from './filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalPipes(new CustomValidationPipe());
+  app.useGlobalFilters(new CustomExceptionFilter());
 
   const config = new DocumentBuilder()
     .setTitle('My Api')

@@ -6,6 +6,6 @@ export interface User extends DefaultDTO {
   person?: Person;
   login: string;
   password?: string;
-  token?: string;
+  rememberToken?: string;
   roles: any;
 }

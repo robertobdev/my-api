@@ -15,10 +15,11 @@ import {
 import { Role } from 'src/modules/users/entities/role.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Modules } from './module.entity';
+import { Acl as IAcl } from '../interfaces/acl.interface';
 
 @ObjectType()
 @Table({ tableName: 'acl' })
-export class Acl extends Model<Acl> {
+export class Acl extends Model<IAcl> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)

@@ -60,9 +60,9 @@ export class User extends Model<IUser> {
   password: string;
 
   @AllowNull(true)
-  @Column(DataType.STRING)
+  @Column({ type: DataType.STRING, field: 'remember_token' })
   @Field({ nullable: true })
-  token: string;
+  rememberToken: string;
 
   @BelongsToMany(() => Role, () => RoleUser)
   @Field((type) => [Role])

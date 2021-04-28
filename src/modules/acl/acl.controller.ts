@@ -1,20 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { HttpResponse } from 'src/utils/http-response';
 import { AclService } from './acl.service';
 import { CreateAclDto } from './dto/create-acl.dto';
-import { UpdateAclDto } from './dto/update-acl.dto';
 
 @Controller('acl')
 export class AclController {
   constructor(private readonly aclService: AclService) {}
 
   @Post()
-  create(@Body() createAclDto: CreateAclDto) {
-    return this.aclService.create(createAclDto);
+  async create(@Body() createAclDto: CreateAclDto) {
+    await this.aclService.create(createAclDto);
+    return HttpResponse.created('ACL criada com sucesso!');
   }
 
   @Get()
   findAll() {
-    return this.aclService.findAll();
+    return this.aclService.findAll({ limit: 0, offset: 10 });
   }
 
   @Get(':id')
@@ -23,8 +32,9 @@ export class AclController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAclDto: UpdateAclDto) {
-    return this.aclService.update(+id, updateAclDto);
+  async update(@Param('id') id: string, @Body() updateAclDto: CreateAclDto) {
+    await this.aclService.update(+id, updateAclDto);
+    return HttpResponse.ok('ACL atualizado com sucesso!');
   }
 
   @Delete(':id')

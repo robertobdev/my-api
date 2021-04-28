@@ -73,7 +73,7 @@ type User {
   personId: Int!
   person: Person!
   login: String!
-  token: String
+  rememberToken: String
   roles: [Role!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -106,9 +106,23 @@ type PersonResponse {
   hasNextPage: Boolean
 }
 
+type AclEdge {
+  cursor: String!
+  node: Acl!
+}
+
+type AclResponse {
+  edges: [AclEdge!]
+  nodes: [Acl!]
+  totalCount: Int!
+  hasNextPage: Boolean
+}
+
 type Query {
   people(paginate: Pagination!): PersonResponse!
   person(id: Int!): Person!
+  acls(paginate: Pagination!): AclResponse!
+  acl(id: Int!): Acl!
 }
 
 input Pagination {

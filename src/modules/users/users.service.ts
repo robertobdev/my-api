@@ -8,7 +8,10 @@ import { User as IUser } from '../users/interfaces/user.interface';
 import { Role } from './entities/role.entity';
 import { Acl } from '../acl/entities/acl.entity';
 import { Modules } from '../acl/entities/module.entity';
-
+import { Person } from '../people/entities/person.entity';
+import { randomBytes } from 'crypto';
+import { promisify } from 'util';
+import { RequestPasswordDto } from './dto/request-password.dto';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User) private userModel: typeof User) {}
@@ -68,6 +71,23 @@ export class UsersService {
       modules: this.removeDuplicateModule(modules),
     };
   }
+
+  async requestPassword({ login }: RequestPasswordDto) {
+    const user = await this.userModel.findOne({
+      where: { login },
+      include: [Person],
+    });
+    if (!user) {
+      return null;
+    }
+    const random = await promisify(randomBytes)(16);
+    const rememberToken = random.toString('hex');
+
+    await user.update({ rememberToken });
+
+    return { email: user.person.email, rememberToken };
+  }
+
   private removeDuplicateModule(duplicates): Array<any> {
     const map = {};
     const uniqueArr = [];

@@ -10,6 +10,7 @@ export class HttpResponse {
   }
 
   static ok = (message: string, data: any = {}) => {
+    console.log('OK!');
     return new HttpResponse(200, message, data);
   };
 

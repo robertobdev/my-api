@@ -4,10 +4,11 @@ import { AclController } from './acl.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Acl } from './entities/acl.entity';
 import { Modules } from './entities/module.entity';
+import { AclResolver } from './acl.resolver';
 
 @Module({
   imports: [SequelizeModule.forFeature([Acl, Modules])],
   controllers: [AclController],
-  providers: [AclService],
+  providers: [AclService, AclResolver],
 })
 export class AclModule {}

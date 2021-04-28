@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import {
@@ -7,6 +14,8 @@ import {
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { RequestPasswordDto } from '../users/dto/request-password.dto';
+import { HttpResponse } from 'src/utils/http-response';
 
 @Controller('auth')
 export class AuthController {
@@ -21,6 +30,21 @@ export class AuthController {
   })
   async login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
+  }
+
+  @Post('request-password')
+  @ApiBody({ type: LoginUserDto })
+  @ApiCreatedResponse({ description: 'Create a person' })
+  @ApiBadRequestResponse({
+    status: 422,
+    description: 'Error to create a person',
+  })
+  @HttpCode(200)
+  async requestNewPassword(@Body() requestPasswordDto: RequestPasswordDto) {
+    await this.authService.requestPassword(requestPasswordDto);
+    return HttpResponse.ok(
+      'Se o email estiver correto, a messagem será enviada!',
+    );
   }
   @Get()
   @UseGuards(JwtAuthGuard)
