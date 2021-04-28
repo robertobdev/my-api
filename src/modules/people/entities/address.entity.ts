@@ -23,15 +23,15 @@ export class Address extends Model<IAddress> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @ForeignKey(() => Person)
   @Column({ field: 'person_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   personId: number;
 
-  @Field((type) => Person)
+  @Field(() => Person)
   @BelongsTo(() => Person, {
     foreignKey: {
       name: 'person_id',
@@ -83,11 +83,11 @@ export class Address extends Model<IAddress> {
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
-  @Field((type) => Date)
+  @Field(() => Date)
   createdAt: Date;
 
   @UpdatedAt
   @Column({ type: DataType.DATE, field: 'updated_at' })
-  @Field((type) => Date)
+  @Field(() => Date)
   updatedAt: Date;
 }

@@ -25,12 +25,12 @@ export class Contact extends Model<IContact> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @ForeignKey(() => Person)
   @Column({ field: 'person_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   personId: number;
 
   @BelongsTo(() => Person, {
@@ -40,7 +40,7 @@ export class Contact extends Model<IContact> {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  @Field((type) => Person)
+  @Field(() => Person)
   person: Person;
 
   @AllowNull(false)

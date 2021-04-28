@@ -8,12 +8,9 @@ import {
   AutoIncrement,
   UpdatedAt,
   CreatedAt,
-  ForeignKey,
-  BelongsTo,
   Model,
   HasOne,
 } from 'sequelize-typescript';
-import { Role } from 'src/modules/users/entities/role.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Acl } from './acl.entity';
 
@@ -25,11 +22,11 @@ export class Modules extends Model<Modules> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @HasOne(() => Acl, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => Acl)
+  @Field(() => Acl)
   acl?: Acl;
 
   @AllowNull(false)

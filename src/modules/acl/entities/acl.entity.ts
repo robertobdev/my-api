@@ -25,12 +25,12 @@ export class Acl extends Model<IAcl> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @ForeignKey(() => Role)
   @Column({ type: DataType.NUMBER, field: 'role_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   roleId: number;
 
   @BelongsTo(() => Role, {
@@ -40,12 +40,12 @@ export class Acl extends Model<IAcl> {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  @Field((type) => Role)
+  @Field(() => Role)
   role: Role;
 
   @ForeignKey(() => Modules)
   @Column({ type: DataType.NUMBER, field: 'module_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   moduleId: number;
 
   @BelongsTo(() => Modules, {
@@ -55,7 +55,7 @@ export class Acl extends Model<IAcl> {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  @Field((type) => Modules)
+  @Field(() => Modules)
   module: Modules;
 
   @AllowNull(false)

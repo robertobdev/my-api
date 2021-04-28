@@ -30,12 +30,12 @@ export class User extends Model<IUser> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @ForeignKey(() => Person)
   @Column({ type: DataType.NUMBER, field: 'person_id' })
-  @Field((type) => Int)
+  @Field(() => Int)
   personId: number;
 
   @BelongsTo(() => Person, {
@@ -45,7 +45,7 @@ export class User extends Model<IUser> {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  @Field((type) => Person)
+  @Field(() => Person)
   person: Person;
 
   @AllowNull(false)
@@ -65,7 +65,7 @@ export class User extends Model<IUser> {
   rememberToken: string;
 
   @BelongsToMany(() => Role, () => RoleUser)
-  @Field((type) => [Role])
+  @Field(() => [Role])
   roles: Role[];
 
   @CreatedAt

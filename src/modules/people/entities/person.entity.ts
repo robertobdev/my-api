@@ -25,7 +25,7 @@ export class Person extends Model<IPerson> {
   @AllowNull(false)
   @Unique
   @Column(DataType.INTEGER)
-  @Field((type) => Int)
+  @Field(() => Int)
   id?: number;
 
   @AllowNull(false)
@@ -73,14 +73,14 @@ export class Person extends Model<IPerson> {
   updatedAt?: Date;
 
   @HasOne(() => User, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => User)
+  @Field(() => User)
   user?: User;
 
   @HasMany(() => Address, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => [Address])
+  @Field(() => [Address])
   addresses: Address[];
 
   @HasMany(() => Contact, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @Field((type) => [Contact])
+  @Field(() => [Contact])
   contacts: Contact[];
 }
