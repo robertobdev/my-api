@@ -36,23 +36,47 @@ export class UsersService {
     const userDecode = user.toJSON() as IUser;
     //TODO: Fix exclude field on User Entity
     delete userDecode.password;
+    let acl = [];
+    let modules = [];
+    //TODO: Refactory!!!
     userDecode.roles.map((role: any) => {
-      role.acl = role.acl
+      const aclToGuard = role.acl
         .reduce((acc, current) => {
           const keys = Object.keys(current);
-          //TODO: Remove last key
           const arrays = keys
             .join(`_${current.module.description},`)
             .split(',');
           arrays.pop();
           acc = [...arrays, ...acc];
+          delete current.module.createdAt;
+          delete current.module.updatedAt;
+          delete current.module.description;
+          modules = [...modules, current.module];
           return acc;
         }, [])
         .map((acl: string) => acl.toUpperCase().replace('IS', ''));
 
+      acl = [...acl, ...aclToGuard];
+
       delete role.RoleUser;
+      delete role.acl;
       return role;
     });
-    return userDecode;
+    return {
+      acl: [...new Set(acl)],
+      ...userDecode,
+      modules: this.removeDuplicateModule(modules),
+    };
+  }
+  private removeDuplicateModule(duplicates): Array<any> {
+    const map = {};
+    const uniqueArr = [];
+    duplicates.forEach((duplicate) => {
+      if (!map[JSON.stringify(duplicate)]) {
+        map[JSON.stringify(duplicate)] = true;
+        uniqueArr.push(duplicate);
+      }
+    });
+    return uniqueArr;
   }
 }

@@ -17,10 +17,12 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Acl } from '../shared/decorators/acl.decorator';
+import { AclGuard } from '../shared/guards/acl.guard';
 @Controller('people')
+@UseGuards(AclGuard)
+@UseGuards(JwtAuthGuard)
 export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
 
@@ -42,8 +44,7 @@ export class PeopleController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  @Acl('PEOPLE_GET')
+  @Acl('GET_USERS')
   findOne(@Param('id') id: string) {
     return this.peopleService.findOne(+id);
   }
