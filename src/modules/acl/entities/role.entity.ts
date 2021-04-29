@@ -12,10 +12,10 @@ import {
   BelongsToMany,
   HasMany,
 } from 'sequelize-typescript';
-import { RoleUser } from './role-user.entity';
-import { User } from './user.entity';
+import { RoleUser } from '../../users/entities/role-user.entity';
+import { User } from '../../users/entities/user.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Acl } from '../../acl/entities/acl.entity';
+import { Acl } from './acl.entity';
 
 @ObjectType()
 @Table({ tableName: 'roles' })

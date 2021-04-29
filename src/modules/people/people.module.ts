@@ -12,7 +12,7 @@ import {
   EmailAlreadyExistConstraint,
   LoginAlreadyExistConstraint,
 } from '../../helpers/validations';
-import { Role } from '../users/entities/role.entity';
+import { Role } from '../acl/entities/role.entity';
 import { RoleUser } from '../users/entities/role-user.entity';
 import { userProviders } from '../../providers/user.providers';
 import { PeopleResolver } from './people.resolver';

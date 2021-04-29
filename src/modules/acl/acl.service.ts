@@ -5,11 +5,15 @@ import { CreateAclDto } from './dto/create-acl.dto';
 import { HttpResponse } from 'src/utils/http-response';
 import { PaginationDB } from '../shared/interfaces/pagination.interface';
 import { Modules } from './entities/module.entity';
-import { Role } from '../users/entities/role.entity';
+import { Role } from './entities/role.entity';
 
 @Injectable()
 export class AclService {
-  constructor(@InjectModel(Acl) private aclModel: typeof Acl) {}
+  constructor(
+    @InjectModel(Acl) private aclModel: typeof Acl,
+    @InjectModel(Role) private roleModel: typeof Role,
+    @InjectModel(Modules) private modulesModel: typeof Modules,
+  ) {}
   async create(createAclDto: CreateAclDto) {
     try {
       await this.aclModel.upsert(createAclDto);
@@ -26,6 +30,13 @@ export class AclService {
       limit,
       offset,
     });
+  }
+
+  async findRoleAndModules() {
+    const roles = await this.roleModel.findAll();
+    const modules = await this.modulesModel.findAll();
+
+    return { roles, modules };
   }
 
   async findOne(id: number) {

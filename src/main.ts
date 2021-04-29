@@ -7,6 +7,7 @@ import { CustomExceptionFilter } from './filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalPipes(new CustomValidationPipe());
   app.useGlobalFilters(new CustomExceptionFilter());
@@ -23,6 +24,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  app.setGlobalPrefix('v1');
   await app.listen(3000);
 }
 bootstrap();

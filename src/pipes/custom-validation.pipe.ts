@@ -21,10 +21,9 @@ export class CustomValidationPipe extends ValidationPipe {
         }
 
         throw new UnprocessableEntityException(
-          HttpResponse.unprocessableEntity(
-            'Não foi possivel validar.',
+          HttpResponse.unprocessableEntity('Não foi possivel validar.', [
             validations,
-          ),
+          ]),
         );
       }
     }

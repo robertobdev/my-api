@@ -14,7 +14,7 @@ export class AuthService {
   async login(userLogin: LoginUserDto) {
     const user = (await this.userService.findOne(userLogin)) as User;
     return {
-      access_token: this.jwtService.sign({ sub: user.id, ...user }),
+      access_token: this.jwtService.sign({ sub: user.id, user }),
     };
   }
   async requestPassword(requestPassword: RequestPasswordDto) {

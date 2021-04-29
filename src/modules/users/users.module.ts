@@ -4,7 +4,7 @@ import { Address } from '../people/entities/address.entity';
 import { Contact } from '../people/entities/contact.entity';
 import { Person } from '../people/entities/person.entity';
 import { RoleUser } from './entities/role-user.entity';
-import { Role } from './entities/role.entity';
+import { Role } from '../acl/entities/role.entity';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 

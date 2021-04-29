@@ -16,7 +16,7 @@ import {
 } from 'sequelize-typescript';
 import { Person } from '../../people/entities/person.entity';
 import { RoleUser } from './role-user.entity';
-import { Role } from './role.entity';
+import { Role } from '../../acl/entities/role.entity';
 import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { User as IUser } from '../../people/interfaces';

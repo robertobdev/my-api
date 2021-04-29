@@ -5,7 +5,7 @@ import { User } from './entities/user.entity';
 import { compareSync } from 'bcrypt';
 import { HttpResponse } from 'src/utils/http-response';
 import { User as IUser } from '../users/interfaces/user.interface';
-import { Role } from './entities/role.entity';
+import { Role } from '../acl/entities/role.entity';
 import { Acl } from '../acl/entities/acl.entity';
 import { Modules } from '../acl/entities/module.entity';
 import { Person } from '../people/entities/person.entity';

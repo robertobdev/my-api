@@ -12,7 +12,7 @@ import {
   BelongsTo,
   Model,
 } from 'sequelize-typescript';
-import { Role } from 'src/modules/users/entities/role.entity';
+import { Role } from '../entities/role.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Modules } from './module.entity';
 import { Acl as IAcl } from '../interfaces/acl.interface';

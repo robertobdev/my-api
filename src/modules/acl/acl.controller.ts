@@ -47,6 +47,12 @@ export class AclController {
     return this.aclService.findAll({ limit: 0, offset: 10 });
   }
 
+  @Get('/configurations')
+  @Acl('GET_USERS')
+  findRoleAndModules() {
+    return this.aclService.findRoleAndModules();
+  }
+
   @Get(':id')
   @Acl('GET_USERS')
   findOne(@Param('id') id: string) {
