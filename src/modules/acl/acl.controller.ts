@@ -44,7 +44,8 @@ export class AclController {
   @Get()
   @Acl('GET_USERS')
   findAll() {
-    return this.aclService.findAll({ limit: 0, offset: 10 });
+    // return this.aclService.findAll({ limit: 0, offset: 10 });
+    return '';
   }
 
   @Get('/configurations')

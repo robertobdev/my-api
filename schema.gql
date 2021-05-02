@@ -94,18 +94,6 @@ type Person {
   contacts: [Contact!]!
 }
 
-type PersonEdge {
-  cursor: String!
-  node: Person!
-}
-
-type PersonResponse {
-  edges: [PersonEdge!]
-  nodes: [Person!]
-  totalCount: Int!
-  hasNextPage: Boolean
-}
-
 type AclEdge {
   cursor: String!
   node: Acl!
@@ -119,13 +107,15 @@ type AclResponse {
 }
 
 type Query {
-  people(paginate: Pagination!): PersonResponse!
   person(id: Int!): Person!
-  acls(paginate: Pagination!): AclResponse!
+  acls(crudList: CrudListInputs!): AclResponse!
   acl(id: Int!): Acl!
 }
 
-input Pagination {
+input CrudListInputs {
   limit: Int = 10
-  page: Int!
+  page: Int = 1
+  field: String = "id"
+  order: String = "ASC"
+  filter: String = ""
 }

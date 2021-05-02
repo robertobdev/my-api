@@ -6,7 +6,9 @@ import { HttpResponse } from 'src/utils/http-response';
 import { PaginationDB } from '../shared/interfaces/pagination.interface';
 import { Modules } from './entities/module.entity';
 import { Role } from './entities/role.entity';
-
+import { Op } from 'sequelize';
+import { SortInputGraphql } from '../shared/interfaces/sort.interface';
+import { OrderInputGraphql } from '../shared/interfaces/order.enum';
 @Injectable()
 export class AclService {
   constructor(
@@ -23,12 +25,32 @@ export class AclService {
     }
   }
 
-  async findAll({ limit, offset }: PaginationDB) {
+  async findAll(
+    { limit, offset }: PaginationDB,
+    filter = '',
+    { field = 'id', order = OrderInputGraphql.ASC }: SortInputGraphql,
+  ) {
+    const filterConditions =
+      filter !== ''
+        ? {
+            [Op.or]: [
+              {
+                '$role.description$': { [Op.like]: `%${filter}%` },
+              },
+              {
+                '$module.title$': { [Op.like]: `%${filter}%` },
+              },
+            ],
+          }
+        : {};
     return await this.aclModel.findAndCountAll({
       distinct: true,
       include: [Modules, Role],
       limit,
       offset,
+      // @ts-ignore
+      where: filterConditions,
+      order: [[field, order]],
     });
   }
 
@@ -44,7 +66,7 @@ export class AclService {
     if (!acl) {
       throw HttpResponse.notFound('Acl não encontrada');
     }
-    return true;
+    return acl;
   }
 
   async update(id: number, updateAclDto: CreateAclDto) {
