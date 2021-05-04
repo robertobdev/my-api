@@ -31,14 +31,20 @@ export class UsersService {
             },
           ],
         },
+        {
+          model: Person,
+          attributes: ['id', 'name', 'avatar'],
+        },
       ],
     });
     if (!user || !compareSync(password, user.password)) {
       throw HttpResponse.badRequest('Dados incorretos!');
     }
-    const userDecode = user.toJSON() as IUser;
+    let userDecode = user.toJSON() as IUser;
     //TODO: Fix exclude field on User Entity
+    userDecode = { ...userDecode, ...userDecode.person };
     delete userDecode.password;
+    delete userDecode.person;
     let acl = [];
     let modules = [];
     //TODO: Refactory!!!
