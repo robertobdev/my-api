@@ -43,7 +43,8 @@ export class PeopleController {
   @Get()
   @Acl('GET_USERS')
   findAll() {
-    return this.peopleService.findAll({ limit: 0, offset: 10 });
+    // this.peopleService.findAll({ limit: 0, offset: 10 });
+    return '';
   }
 
   @Get(':id')

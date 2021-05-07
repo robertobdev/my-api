@@ -10,6 +10,10 @@ import { Contact } from './entities/contact.entity';
 import { Person } from './entities/person.entity';
 import { User } from '../users/entities/user.entity';
 import { Contact as IContact } from './interfaces/contact.interface';
+import { OrderInputGraphql } from '../shared/interfaces/order.enum';
+import { SortInputGraphql } from '../shared/interfaces/sort.interface';
+import { Op } from 'sequelize';
+import { Role } from '../acl/entities/role.entity';
 
 @Injectable()
 export class PeopleService {
@@ -42,20 +46,49 @@ export class PeopleService {
     }
   }
 
-  async findAll({ limit, offset }: PaginationDB) {
-    const people = await this.personModel.findAndCountAll({
-      include: [Address, Contact, User],
+  async findAll(
+    { limit, offset }: PaginationDB,
+    filter = '',
+    { field = 'id', order = OrderInputGraphql.ASC }: SortInputGraphql,
+  ) {
+    const filterConditions =
+      filter !== ''
+        ? {
+            [Op.or]: [
+              {
+                name: { [Op.like]: `%${filter}%` },
+              },
+              {
+                cpf: { [Op.like]: `%${filter}%` },
+              },
+              {
+                email: { [Op.like]: `%${filter}%` },
+              },
+              {
+                '$user.login$': { [Op.like]: `%${filter}%` },
+              },
+            ],
+          }
+        : {};
+    return await this.personModel.findAndCountAll({
       distinct: true,
+      include: [User],
       limit,
       offset,
+      // @ts-ignore
+      where: filterConditions,
+      order: [[field, order]],
     });
-    return people;
   }
 
   async findOne(id: number) {
-    return await this.personModel.findByPk(id, {
+    const person = await this.personModel.findByPk(id, {
       include: [Address, Contact, User],
     });
+    if (!person) {
+      throw HttpResponse.notFound('Usuário não encontrada');
+    }
+    return person;
   }
 
   async update(id: number, updatePersonDto: UpdatePersonDto) {

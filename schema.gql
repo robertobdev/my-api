@@ -94,6 +94,18 @@ type Person {
   contacts: [Contact!]!
 }
 
+type PersonEdge {
+  cursor: String!
+  node: Person!
+}
+
+type PersonResponse {
+  edges: [PersonEdge!]
+  nodes: [Person!]
+  totalCount: Int!
+  hasNextPage: Boolean
+}
+
 type AclEdge {
   cursor: String!
   node: Acl!
@@ -107,6 +119,7 @@ type AclResponse {
 }
 
 type Query {
+  people(crudList: CrudListInputs!): PersonResponse!
   person(id: Int!): Person!
   acls(crudList: CrudListInputs!): AclResponse!
   acl(id: Int!): Acl!
