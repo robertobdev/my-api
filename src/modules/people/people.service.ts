@@ -83,7 +83,7 @@ export class PeopleService {
 
   async findOne(id: number) {
     const person = await this.personModel.findByPk(id, {
-      include: [Address, Contact, User],
+      include: [Address, Contact, { model: User, include: [Role] }],
     });
     if (!person) {
       throw HttpResponse.notFound('Usuário não encontrada');
