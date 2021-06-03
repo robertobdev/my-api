@@ -117,7 +117,7 @@ export class UsersService {
               include: [
                 {
                   model: Modules,
-                  attributes: ['description', 'title', 'router'],
+                  attributes: ['description', 'title', 'router', 'submenus'],
                 },
               ],
               attributes: ['isShow', 'isGet', 'isPost', 'isUpdate', 'isDelete'],

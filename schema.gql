@@ -8,6 +8,7 @@ type Modules {
   title: String!
   router: String!
   description: String!
+  submenus: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
