@@ -87,6 +87,7 @@ export class UsersService {
     const { login, password } = userLogin;
     const user = await this.userModel.findOne({
       where: { login },
+      attributes: ['id', 'password'],
     });
     if (!user || !compareSync(password, user.password)) {
       throw HttpResponse.badRequest('Dados incorretos!');
@@ -116,7 +117,7 @@ export class UsersService {
               include: [
                 {
                   model: Modules,
-                  attributes: ['description'],
+                  attributes: ['description', 'title', 'router'],
                 },
               ],
               attributes: ['isShow', 'isGet', 'isPost', 'isUpdate', 'isDelete'],
@@ -124,7 +125,7 @@ export class UsersService {
           ],
         },
       ],
-      attributes: ['id'],
+      attributes: ['id', 'name', 'avatar'],
     });
     if (!user) {
       throw HttpResponse.notFound('Usuário não encontrada');
@@ -141,7 +142,6 @@ export class UsersService {
             .split(',');
           arrays.pop();
           acc = [...arrays, ...acc];
-          delete current.module.description;
           modules = [...modules, current.module];
           return acc;
         }, [])
@@ -149,8 +149,13 @@ export class UsersService {
 
       acl = [...acl, ...aclToGuard];
     }
-
-    return { id: userId, acl: [...new Set(acl)] };
+    return {
+      id: userId,
+      name: decodedUser.name,
+      avatar: decodedUser.avatar,
+      modules: this.removeDuplicateModule(modules),
+      acl: [...new Set(acl)],
+    };
   }
 
   async requestPassword({ login }: RequestPasswordDto) {
