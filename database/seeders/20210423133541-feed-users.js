@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.bulkInsert(
-        'people',
+        'users',
         [
           {
             name: 'Admin 1',
@@ -15,10 +15,14 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'admin@admin.com',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
           {
+            id: 2,
             name: 'Manager',
             cpf: '817.535.687-14',
             email: 'manager@manager.com',
@@ -26,10 +30,14 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'manager@manager.com',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
           {
+            id: 3,
             name: 'Manager 2',
             cpf: '642.045.143-40',
             email: 'manager1@manager.com',
@@ -37,6 +45,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'manager1@manager.com',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -48,6 +59,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'betinacamiladacruz_@utbr.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -59,6 +73,9 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'fernandopietronelsonassis-91@atiara.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -70,6 +87,9 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'levilorenzoramos-81@gruposandino.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -81,6 +101,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'hadass.hadassarebecaalicecortereal@leoshehtman.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -92,6 +115,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'isabelaadrianacarvalho_@elimco.com',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -103,6 +129,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'jjessicaluziateixeira@reconciliare.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -114,6 +143,9 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'marcosviniciuskaiquegaelfernandes@callan.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -125,6 +157,9 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'jorgemarcosmartins__jorgemarcosmartins@etec.sp.gov.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -136,6 +171,9 @@ module.exports = {
             gender: 'FEMALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'vitoriabeatrizdanielapires_@lnaa.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -147,6 +185,9 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'eedsonmarcoskaiquelopes@acesse.net',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -159,6 +200,10 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login:
+              'enzojoaquimerickdrumond__enzojoaquimerickdrumond@zipmail.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -170,11 +215,13 @@ module.exports = {
             gender: 'MALE',
             avatar:
               'https://thumbs.dreamstime.com/b/opte-pelo-avatar-placeholder-da-foto-%C3%ADcone-do-perfil-124557887.jpg',
+            login: 'alexandreosvaldomanuelcarvalho_@tursi.com.br',
+            password:
+              '$2b$10$z5V38BrCOClpwf.x7jm2uezhWq3icCS8lR6sKgebDSaEA5.KY6YEq',
             created_at: new Date(),
             updated_at: new Date(),
           },
         ],
-
         {
           transaction,
         },
@@ -187,7 +234,7 @@ module.exports = {
     }
   },
 
-  down: async (queryInterface) => {
-    await queryInterface.bulkDelete('people', null, {});
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('users', null, {});
   },
 };
