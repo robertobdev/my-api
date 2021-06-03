@@ -16,9 +16,9 @@ import {
   LoginAlreadyExist,
 } from '../../../helpers/validations';
 import { ApiProperty } from '@nestjs/swagger';
-import { GENDER } from 'src/modules/people/interfaces';
 import { CreateAddressDto } from './create-address.dto';
 import { CreateContactDto } from './create-contact.dto';
+import { GENDER } from '../interfaces/gender.enum';
 export class CreateUserDto {
   @ApiProperty({ example: 'Julio Eduardo Joaquim Lima' })
   @IsString({ message: 'name:Campo precisa ser de texto.' })

@@ -7,27 +7,26 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Op } from 'sequelize';
-
-import { Person } from '../../modules/people/entities/person.entity';
+import { User } from 'src/modules/users/entities/user.entity';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class CpfAlreadyExistConstraint implements ValidatorConstraintInterface {
   constructor(
-    @Inject('PERSON_REPOSITORY')
-    private personRepository: typeof Person,
+    @Inject('USER_REPOSITORY')
+    private userRepository: typeof User,
   ) {}
 
   async validate(cpf: string, validationArguments: ValidationArguments) {
-    let { id } = validationArguments.object as Person;
+    let { id } = validationArguments.object as User;
     if (!id) {
       id = 0;
     }
     try {
-      const person = await this.personRepository.findOne({
+      const user = await this.userRepository.findOne({
         where: { cpf, id: { [Op.not]: id } },
       });
-      return !!!person;
+      return !!!user;
     } catch (e) {
       return false;
     }

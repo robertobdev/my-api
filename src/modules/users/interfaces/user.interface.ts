@@ -1,6 +1,6 @@
 import { Address } from './address.interface';
 import { Contact } from './contact.interface';
-import { DefaultDTO } from './default-dto.interface';
+import { DefaultDTO } from '../../shared/interfaces/default-dto.interface';
 import { GENDER } from './gender.enum';
 
 export interface User extends DefaultDTO {
