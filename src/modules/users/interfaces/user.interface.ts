@@ -1,9 +1,17 @@
-import { DefaultDTO } from '../../people/interfaces/default-dto.interface';
-import { Person } from '../../people/interfaces/person.interface';
+import { Address } from './address.interface';
+import { Contact } from './contact.interface';
+import { DefaultDTO } from './default-dto.interface';
+import { GENDER } from './gender.enum';
 
 export interface User extends DefaultDTO {
-  personId?: number;
-  person?: Person;
+  name: string;
+  cpf: string;
+  email: string;
+  birthday: string;
+  gender: GENDER;
+  avatar: string;
+  addresses?: Address[];
+  contacts?: Contact[];
   login: string;
   password?: string;
   rememberToken?: string;
