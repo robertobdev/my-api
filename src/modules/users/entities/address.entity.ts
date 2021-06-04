@@ -12,9 +12,9 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Person } from './person.entity';
-import { Address as IAddress } from '../interfaces';
+import { Address as IAddress } from '../interfaces/address.interface';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { User } from './user.entity';
 @ObjectType()
 @Table({ tableName: 'addresses' })
 export class Address extends Model<IAddress> {
@@ -26,20 +26,20 @@ export class Address extends Model<IAddress> {
   @Field(() => Int)
   id: number;
 
-  @ForeignKey(() => Person)
-  @Column({ field: 'person_id' })
+  @ForeignKey(() => User)
+  @Column({ field: 'user_id' })
   @Field(() => Int)
-  personId: number;
+  userId: number;
 
-  @Field(() => Person)
-  @BelongsTo(() => Person, {
+  @Field(() => User)
+  @BelongsTo(() => User, {
     foreignKey: {
-      name: 'person_id',
+      name: 'user_id',
     },
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  person: Person;
+  user: User;
 
   @AllowNull(false)
   @Column(DataType.STRING)

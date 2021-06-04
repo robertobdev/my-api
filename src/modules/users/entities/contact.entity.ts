@@ -13,9 +13,9 @@ import {
   CreatedAt,
 } from 'sequelize-typescript';
 import { CONTACTYPE } from '../interfaces/contact_type.enum';
-import { Person } from './person.entity';
-import { Contact as IContact } from '../interfaces';
+import { Contact as IContact } from '../interfaces/contact.interface';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { User } from './user.entity';
 
 @ObjectType()
 @Table({ tableName: 'contacts' })
@@ -28,20 +28,20 @@ export class Contact extends Model<IContact> {
   @Field(() => Int)
   id: number;
 
-  @ForeignKey(() => Person)
-  @Column({ field: 'person_id' })
+  @ForeignKey(() => User)
+  @Column({ field: 'user_id' })
   @Field(() => Int)
-  personId: number;
+  userId: number;
 
-  @BelongsTo(() => Person, {
+  @BelongsTo(() => User, {
     foreignKey: {
-      name: 'person_id',
+      name: 'user_id',
     },
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  @Field(() => Person)
-  person: Person;
+  @Field(() => User)
+  user: User;
 
   @AllowNull(false)
   @Column({

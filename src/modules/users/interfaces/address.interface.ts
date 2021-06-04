@@ -1,9 +1,8 @@
-import { DefaultDTO } from './default-dto.interface';
-import { Person } from './person.interface';
-
+import { User } from 'src/modules/users/interfaces/user.interface';
+import { DefaultDTO } from '../../shared/interfaces/default-dto.interface';
 export interface Address extends DefaultDTO {
-  personId?: number;
-  person?: Person;
+  userId?: number;
+  user?: User;
   zipcode: string;
   street: string;
   number: string;

@@ -1,17 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PeopleController } from './people.controller';
-import { PeopleService } from './people.service';
-
-describe('PeopleController', () => {
-  let controller: PeopleController;
+import { UserController } from './users.controller';
+import { UsersService } from './users.service';
+describe('UserController', () => {
+  let controller: UserController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [],
-      controllers: [PeopleController],
+      controllers: [UserController],
       providers: [
         {
-          provide: PeopleService,
+          provide: UsersService,
           useValue: {
             getCats: jest.fn(() => []),
             addCat: jest.fn(() => {
@@ -22,7 +21,7 @@ describe('PeopleController', () => {
       ],
     }).compile();
 
-    controller = module.get<PeopleController>(PeopleController);
+    controller = module.get<UserController>(UserController);
   });
 
   it('should be defined', () => {

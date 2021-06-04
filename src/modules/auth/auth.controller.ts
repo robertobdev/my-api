@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Request,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import {
@@ -8,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
 import { HttpResponse } from 'src/utils/http-response';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -22,6 +31,20 @@ export class AuthController {
   })
   async login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
+  }
+
+  @Get('user')
+  @ApiCreatedResponse({ description: 'Get an user' })
+  @UseGuards(JwtAuthGuard)
+  @ApiBadRequestResponse({
+    status: 404,
+    description: 'User not found!',
+  })
+  async getUserAuthorization(@Request() { user }) {
+    delete user.acl;
+    delete user.iat;
+    delete user.exp;
+    return user;
   }
 
   @Post('request-password')

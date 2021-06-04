@@ -90,4 +90,16 @@ export class AclService {
       throw HttpResponse.unprocessableEntity('Erro ao excluir acl!');
     }
   }
+
+  async getAclPermissions(roleId: number): Promise<Acl[]> {
+    const acls = await this.aclModel.findAll({
+      where: { roleId },
+    });
+
+    if (!acls) {
+      throw HttpResponse.unprocessableEntity('Acls não encontradas!');
+    }
+
+    return acls;
+  }
 }

@@ -14,9 +14,7 @@ export class AclGuard implements CanActivate {
     if (!requiredRoles) {
       return true;
     }
-    const {
-      user: { user },
-    } = context.switchToHttp().getRequest();
+    const { user } = context.switchToHttp().getRequest();
 
     return requiredRoles.some((role) => user.acl.includes(role));
   }

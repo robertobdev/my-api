@@ -2,25 +2,26 @@ import {
   AllowNull,
   AutoIncrement,
   BeforeCreate,
-  BelongsTo,
   BelongsToMany,
   Column,
   CreatedAt,
   DataType,
-  ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
   Unique,
   UpdatedAt,
 } from 'sequelize-typescript';
-import { Person } from '../../people/entities/person.entity';
 import { RoleUser } from './role-user.entity';
 import { Role } from '../../acl/entities/role.entity';
 import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { User as IUser } from '../../people/interfaces';
+import { GENDER } from '../interfaces/gender.enum';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Address } from './address.entity';
+import { Contact } from './contact.entity';
+import { User as IUser } from '../interfaces/user.interface';
 
 @ObjectType()
 @Table({ tableName: 'users' })
@@ -31,22 +32,41 @@ export class User extends Model<IUser> {
   @Unique
   @Column(DataType.INTEGER)
   @Field(() => Int)
-  id: number;
+  id?: number;
 
-  @ForeignKey(() => Person)
-  @Column({ type: DataType.NUMBER, field: 'person_id' })
-  @Field(() => Int)
-  personId: number;
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  name: string;
 
-  @BelongsTo(() => Person, {
-    foreignKey: {
-      name: 'personId',
-    },
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
+  @Unique
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  cpf: string;
+
+  @Unique
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  email: string;
+
+  @AllowNull(false)
+  @Column(DataType.DATEONLY)
+  @Field()
+  birthday: Date;
+
+  @AllowNull(false)
+  @Column({
+    type: DataType.ENUM(GENDER.MALE, GENDER.FEMALE, GENDER.OTHER),
   })
-  @Field(() => Person)
-  person: Person;
+  @Field()
+  gender: GENDER;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  @Field()
+  avatar: string;
 
   @AllowNull(false)
   @Unique
@@ -67,6 +87,14 @@ export class User extends Model<IUser> {
   @BelongsToMany(() => Role, () => RoleUser)
   @Field(() => [Role])
   roles: Role[];
+
+  @HasMany(() => Address, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @Field(() => [Address])
+  addresses: Address[];
+
+  @HasMany(() => Contact, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @Field(() => [Contact])
+  contacts: Contact[];
 
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
