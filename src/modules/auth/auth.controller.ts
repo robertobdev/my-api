@@ -36,6 +36,7 @@ export class AuthController {
     return user;
   }
 
+  //TODO: Make test
   @Post('request-password')
   @ApiBody({ type: LoginUserDto })
   @HttpCode(200)
