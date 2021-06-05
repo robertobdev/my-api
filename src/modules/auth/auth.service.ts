@@ -3,10 +3,6 @@ import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
-import { Role } from '../acl/entities/role.entity';
-import { InjectModel } from '@nestjs/sequelize';
-import { HttpResponse } from 'src/utils/http-response';
-import { AclService } from '../acl/acl.service';
 
 @Injectable()
 export class AuthService {

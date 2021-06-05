@@ -2,11 +2,11 @@ import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import PersonResponse from './users.response';
 import { UsersService } from '../users.service';
-import { GqlAuthGuard } from 'src/modules/shared/guards/graphql-auth.guard';
-import { CrudListInputs } from 'src/modules/shared/interfaces/crud-list.input';
 import { User } from '../entities/user.entity';
-import { PaginationResolveGraphql } from 'src/modules/shared/interfaces/pagination.interface';
-import { CrudList } from 'src/modules/shared/interfaces/crud-list.interface';
+import { GqlAuthGuard } from '../../shared/guards/graphql-auth.guard';
+import { CrudListInputs } from '../../shared/interfaces/crud-list.input';
+import { PaginationResolveGraphql } from '../../shared/interfaces/pagination.interface';
+import { CrudList } from '../../shared/interfaces/crud-list.interface';
 
 @Resolver()
 @UseGuards(GqlAuthGuard)

@@ -11,7 +11,7 @@ import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { ApiBody, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')

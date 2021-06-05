@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Acl } from './entities/acl.entity';
 import { CreateAclDto } from './dto/create-acl.dto';
-import { HttpResponse } from 'src/utils/http-response';
 import { PaginationDB } from '../shared/interfaces/pagination.interface';
 import { Modules } from './entities/module.entity';
 import { Role } from './entities/role.entity';
 import { Op } from 'sequelize';
 import { SortInputGraphql } from '../shared/interfaces/sort.interface';
 import { OrderInputGraphql } from '../shared/interfaces/order.enum';
+import { HttpResponse } from '../../utils/http-response';
 @Injectable()
 export class AclService {
   constructor(

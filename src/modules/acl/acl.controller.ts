@@ -15,7 +15,7 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Acl } from '../shared/decorators/acl.decorator';
 import { AclGuard } from '../shared/guards/acl.guard';

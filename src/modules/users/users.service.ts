@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from './entities/user.entity';
 import { compareSync } from 'bcrypt';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import { randomBytes } from 'crypto';
 import { promisify } from 'util';
 import { RequestPasswordDto } from './dto/request-password.dto';
