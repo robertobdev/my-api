@@ -13,7 +13,7 @@ module.exports = {
             router: '/acl',
             description: 'ACL',
             submenus:
-              '{"menus":[{"title":"Criar","router":"register"},{"title":"List","router":"list"}]}',
+              '{"menus":[{"title":"Criar","router":"register"},{"title":"Listar","router":"list"}]}',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -23,7 +23,7 @@ module.exports = {
             router: '/users',
             description: 'users',
             submenus:
-              '{"menus":[{"title":"Criar","router":"register"},{"title":"List","router":"list"}]}',
+              '{"menus":[{"title":"Criar","router":"register"},{"title":"Listar","router":"list"}]}',
             created_at: new Date(),
             updated_at: new Date(),
           },
