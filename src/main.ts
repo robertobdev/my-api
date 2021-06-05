@@ -11,7 +11,7 @@ async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalPipes(new CustomValidationPipe());
   app.useGlobalFilters(new CustomExceptionFilter());
-
+  app.setGlobalPrefix('v1');
   const config = new DocumentBuilder()
     .setTitle('My Api')
     .setDescription(
@@ -22,9 +22,8 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('v1/swagger', app, document);
 
-  app.setGlobalPrefix('v1');
   await app.listen(3000);
 }
 bootstrap();
