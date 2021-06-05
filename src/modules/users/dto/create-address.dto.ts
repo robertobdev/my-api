@@ -39,4 +39,12 @@ export class CreateAddressDto {
   @IsString({ message: 'country:Campo precisa ser de texto.' })
   @IsNotEmpty({ message: 'country:Campo obrigatório.' })
   country: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  userId: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  id: number;
 }

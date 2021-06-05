@@ -21,4 +21,12 @@ export class CreateContactDto {
   @ApiProperty({ required: false })
   @IsOptional()
   complement: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  id: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  userId: number;
 }
