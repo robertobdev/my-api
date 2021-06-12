@@ -15,6 +15,7 @@ import { AclGuard } from '../shared/guards/acl.guard';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 @Controller('users')
 @UseGuards(AclGuard)
 @UseGuards(JwtAuthGuard)
@@ -73,5 +74,15 @@ export class UserController {
   async deleteContact(@Param('contactId') id: string) {
     await this.userService.removeContact(+id);
     return HttpResponse.ok('Contato removido com sucesso!');
+  }
+
+  @Patch('/change-password/:id')
+  @Acl('UPDATE_USERS')
+  async changePassword(
+    @Param('id') id: string,
+    @Body() passwords: ChangePasswordDto,
+  ) {
+    await this.userService.changePassword(+id, passwords);
+    return HttpResponse.ok('A sua senha foi alterada com sucesso!');
   }
 }

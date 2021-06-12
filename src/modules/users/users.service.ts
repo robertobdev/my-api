@@ -20,6 +20,7 @@ import { Role } from '../acl/entities/role.entity';
 import { Acl } from '../acl/entities/acl.entity';
 import { Modules } from '../acl/entities/module.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 @Injectable()
 export class UsersService {
   constructor(
@@ -263,6 +264,25 @@ export class UsersService {
       console.log(error);
       await transaction.rollback();
       throw HttpResponse.unprocessableEntity('Erro ao salvar contatos!');
+    }
+  }
+  async changePassword(id: number, passwords: ChangePasswordDto) {
+    const { currentPassword, newPassword } = passwords;
+    try {
+      const user = await this.userModel.findOne({
+        where: { id },
+        attributes: ['id', 'password'],
+      });
+
+      if (!user || !compareSync(currentPassword, user.password)) {
+        throw HttpResponse.badRequest('Senha atual incorreta!');
+      }
+
+      await user.update({ password: newPassword });
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw HttpResponse.unprocessableEntity('Erro ao salvar nova senha!');
     }
   }
 
