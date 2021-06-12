@@ -28,7 +28,7 @@ export class UsersResolver {
       order,
     } = crudList;
     const offset = (page - 1) * limit;
-    console.log(field);
+
     const { count, rows: acls } = await this.userService.findAll(
       {
         limit,

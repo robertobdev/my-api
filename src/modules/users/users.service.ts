@@ -127,7 +127,7 @@ export class UsersService {
           ],
         },
       ],
-      attributes: ['id', 'name', 'avatar'],
+      attributes: ['id', 'name', 'avatar', 'cpf', 'birthday', 'gender'],
     });
     if (!user) {
       throw HttpResponse.notFound('Usuário não encontrada');
@@ -155,6 +155,9 @@ export class UsersService {
       id: userId,
       name: decodedUser.name,
       avatar: decodedUser.avatar,
+      cpf: decodedUser.cpf,
+      birthday: decodedUser.birthday,
+      gender: decodedUser.gender,
       modules: this.removeDuplicateModule(modules),
       acl: [...new Set(acl)],
     };
@@ -219,8 +222,12 @@ export class UsersService {
       });
 
       await transaction.commit();
+      //TODO: Maybe find another way to get ids from bulkCreate
+      const updatedAddresses = await this.addressesModel.findAll({
+        where: { userId: id },
+      });
 
-      return true;
+      return updatedAddresses;
     } catch (error) {
       console.log(error);
       await transaction.rollback();
@@ -241,11 +248,17 @@ export class UsersService {
       await this.contactsModel.bulkCreate(contacts, {
         updateOnDuplicate: ['contactType', 'value', 'updatedAt'],
         transaction,
+        returning: true,
+        hooks: true,
       });
 
       await transaction.commit();
+      //TODO: Maybe find another way to get ids from bulkCreate
+      const updatedContacts = await this.contactsModel.findAll({
+        where: { userId: id },
+      });
 
-      return true;
+      return updatedContacts;
     } catch (error) {
       console.log(error);
       await transaction.rollback();
@@ -273,10 +286,6 @@ export class UsersService {
       console.log(error);
       throw HttpResponse.unprocessableEntity('Erro ao excluir contato!');
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 
   private removeDuplicateModule(duplicates): Array<any> {

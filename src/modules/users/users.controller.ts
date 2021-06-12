@@ -44,8 +44,11 @@ export class UserController {
     @Param('userId') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    await this.userService.updateAddresses(+id, updateUserDto);
-    return HttpResponse.ok('Usuário atualizado com sucesso!');
+    const addresses = await this.userService.updateAddresses(
+      +id,
+      updateUserDto,
+    );
+    return HttpResponse.ok('Usuário atualizado com sucesso!', addresses);
   }
 
   @Delete('/addresses/:addressId')
@@ -61,8 +64,8 @@ export class UserController {
     @Param('userId') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    await this.userService.updateContacts(+id, updateUserDto);
-    return HttpResponse.ok('Usuário atualizado com sucesso!');
+    const contacts = await this.userService.updateContacts(+id, updateUserDto);
+    return HttpResponse.ok('Usuário atualizado com sucesso!', contacts);
   }
 
   @Delete('/contacts/:contactId')
