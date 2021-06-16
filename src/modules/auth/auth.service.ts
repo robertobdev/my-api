@@ -3,10 +3,7 @@ import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
-import { Role } from '../acl/entities/role.entity';
-import { InjectModel } from '@nestjs/sequelize';
-import { HttpResponse } from 'src/utils/http-response';
-import { AclService } from '../acl/acl.service';
+import EmailController from '../../utils/helpers/mail/controller/email-controller';
 
 @Injectable()
 export class AuthService {
@@ -23,11 +20,17 @@ export class AuthService {
 
   async requestPassword(requestPassword: RequestPasswordDto) {
     const user = await this.userService.requestPassword(requestPassword);
+
     if (!user) {
       return true;
     }
-
     //TODO: Send email
+    const resultEmail = await EmailController.sendEmail({
+      to: 'robertojf95@gmail.com',
+      subject: 'Test send email patters',
+      message: `teste message ${user.rememberToken}`,
+    });
+    console.log(resultEmail);
     return true;
   }
 }

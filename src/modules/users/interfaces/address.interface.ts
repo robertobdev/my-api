@@ -1,5 +1,5 @@
-import { User } from 'src/modules/users/interfaces/user.interface';
 import { DefaultDTO } from '../../shared/interfaces/default-dto.interface';
+import { User } from './user.interface';
 export interface Address extends DefaultDTO {
   userId?: number;
   user?: User;

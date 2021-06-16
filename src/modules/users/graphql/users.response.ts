@@ -1,5 +1,5 @@
 import { ObjectType } from '@nestjs/graphql';
-import relayTypes from 'src/modules/shared/interfaces/relay.types';
+import relayTypes from '../../shared/interfaces/relay.types';
 import { User } from '../entities/user.entity';
 
 @ObjectType()

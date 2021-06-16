@@ -1,6 +1,12 @@
 # MyApi
 
 
+### Includes
+
+SendGrid library to send emails
+
+> Add your sendgrid key on .env and choose the sendgrip controller
+
 # Testing
 
 ## OpenApi

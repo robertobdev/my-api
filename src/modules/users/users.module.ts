@@ -5,15 +5,16 @@ import { Role } from '../acl/entities/role.entity';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 import { UsersResolver } from './graphql/users.resolver';
-import { userProviders } from 'src/providers/user.providers';
+
+import { Address } from './entities/address.entity';
+import { Contact } from './entities/contact.entity';
+import { UserController } from './users.controller';
 import {
   CpfAlreadyExistConstraint,
   EmailAlreadyExistConstraint,
   LoginAlreadyExistConstraint,
-} from 'src/helpers/validations';
-import { Address } from './entities/address.entity';
-import { Contact } from './entities/contact.entity';
-import { UserController } from './users.controller';
+} from '../../helpers/validations';
+import { userProviders } from '../../providers/user.providers';
 
 @Module({
   imports: [

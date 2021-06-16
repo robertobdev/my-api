@@ -1,66 +1,88 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 import { HttpResponse } from '../../utils/http-response';
-import {
-  ApiBody,
-  ApiCreatedResponse,
-  ApiBadRequestResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { ApiBody, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Acl } from '../shared/decorators/acl.decorator';
 import { AclGuard } from '../shared/guards/acl.guard';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 @Controller('users')
 @UseGuards(AclGuard)
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
+@ApiTags('User')
 export class UserController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
+  @Acl('POST_USERS')
   @ApiBody({ type: CreateUserDto })
-  @ApiCreatedResponse({ description: 'Create a person' })
-  @ApiBadRequestResponse({
-    status: 422,
-    description: 'Error to create a person',
-  })
   async create(@Body() createUserDto: CreateUserDto) {
     await this.userService.create(createUserDto);
     return HttpResponse.created('Usuário criado com sucesso!');
   }
 
-  @Get()
-  @Acl('GET_USERS')
-  findAll() {
-    // this.userService.findAll({ limit: 0, offset: 10 });
-    return '';
-  }
-
-  @Get(':id')
-  @Acl('GET_USERS')
-  findOne(@Param('id') id: string) {
-    // return this.userService.findOne(+id);
-    return HttpResponse.ok('Usuário atualizado com sucesso!');
-  }
-
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: any) {
-    // await this.userService.update(+id, updateUserDto);
+  @Acl('UPDATE_USERS')
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    await this.userService.update(+id, updateUserDto);
     return HttpResponse.ok('Usuário atualizado com sucesso!');
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Patch('/addresses/:userId')
+  @Acl('UPDATE_USERS')
+  async updateAddresses(
+    @Param('userId') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const addresses = await this.userService.updateAddresses(
+      +id,
+      updateUserDto,
+    );
+    return HttpResponse.ok('Usuário atualizado com sucesso!', addresses);
+  }
+
+  @Delete('/addresses/:addressId')
+  @Acl('UPDATE_USERS')
+  async deleteAddress(@Param('addressId') id: string) {
+    await this.userService.removeAddress(+id);
+    return HttpResponse.ok('Endereço removido com sucesso!');
+  }
+
+  @Patch('/contacts/:userId')
+  @Acl('UPDATE_USERS')
+  async updateContacts(
+    @Param('userId') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const contacts = await this.userService.updateContacts(+id, updateUserDto);
+    return HttpResponse.ok('Usuário atualizado com sucesso!', contacts);
+  }
+
+  @Delete('/contacts/:contactId')
+  @Acl('UPDATE_USERS')
+  async deleteContact(@Param('contactId') id: string) {
+    await this.userService.removeContact(+id);
+    return HttpResponse.ok('Contato removido com sucesso!');
+  }
+
+  @Patch('/change-password/:id')
+  @Acl('UPDATE_USERS')
+  async changePassword(
+    @Param('id') id: string,
+    @Body() passwords: ChangePasswordDto,
+  ) {
+    await this.userService.changePassword(+id, passwords);
+    return HttpResponse.ok('A sua senha foi alterada com sucesso!');
   }
 }

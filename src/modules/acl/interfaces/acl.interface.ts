@@ -1,5 +1,6 @@
-import { DefaultDTO } from 'src/modules/shared/interfaces/default-dto.interface';
-import { Role } from 'src/modules/users/interfaces/role.interface';
+import { DefaultDTO } from '../../shared/interfaces/default-dto.interface';
+import { Role } from '../../users/interfaces/role.interface';
+
 export interface Acl extends DefaultDTO {
   id?: number;
   roleId: number;

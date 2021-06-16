@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from './entities/user.entity';
 import { compareSync } from 'bcrypt';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import { randomBytes } from 'crypto';
 import { promisify } from 'util';
 import { RequestPasswordDto } from './dto/request-password.dto';
@@ -19,6 +19,8 @@ import { SortInputGraphql } from '../shared/interfaces/sort.interface';
 import { Role } from '../acl/entities/role.entity';
 import { Acl } from '../acl/entities/acl.entity';
 import { Modules } from '../acl/entities/module.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 @Injectable()
 export class UsersService {
   constructor(
@@ -104,6 +106,7 @@ export class UsersService {
     }
     return user;
   }
+
   async getAclPermissionsByUser(userId: number) {
     const user = await this.userModel.findOne({
       where: { id: userId },
@@ -125,7 +128,7 @@ export class UsersService {
           ],
         },
       ],
-      attributes: ['id', 'name', 'avatar'],
+      attributes: ['id', 'name', 'avatar', 'cpf', 'birthday', 'gender'],
     });
     if (!user) {
       throw HttpResponse.notFound('Usuário não encontrada');
@@ -153,6 +156,9 @@ export class UsersService {
       id: userId,
       name: decodedUser.name,
       avatar: decodedUser.avatar,
+      cpf: decodedUser.cpf,
+      birthday: decodedUser.birthday,
+      gender: decodedUser.gender,
       modules: this.removeDuplicateModule(modules),
       acl: [...new Set(acl)],
     };
@@ -172,51 +178,134 @@ export class UsersService {
 
     return { email: user.email, rememberToken };
   }
-  //TODO: Update User
-  // async update(id: number, updatePersonDto: UpdatePersonDto) {
-  //   const transaction = await this.sequelize.transaction();
-  //   try {
-  //     const person = await this.personModel.findByPk(id, {
-  //       include: [Contact, Address, User],
-  //     });
 
-  //     //TODO: Make this code a new class
+  async update(id: number, updatePersonDto: UpdateUserDto) {
+    const transaction = await this.sequelize.transaction();
+    try {
+      const user = await this.userModel.findByPk(id, {
+        transaction,
+      });
 
-  //     const toSave = [];
+      user.update(updatePersonDto);
 
-  //     const dtoKeys = Object.keys(updatePersonDto);
-  //     const associations = Object.keys(this.personModel.associations);
+      await transaction.commit();
 
-  //     dtoKeys.forEach((key) => {
-  //       const hasAssociation = associations.includes(key);
-  //       if (!hasAssociation) {
-  //         return;
-  //       }
-  //       updatePersonDto[key].forEach(async (contact: IContact) => {
-  //         if (contact.id) {
-  //           const finded = person[key]?.find(({ id }) => contact.id === id);
-  //           finded?.update(contact);
-  //           return;
-  //         }
-  //         toSave.push(
-  //           this[`${key}Model`]?.create({ ...contact, personId: person.id }),
-  //         );
-  //       });
-  //     });
+      return true;
+    } catch (error) {
+      console.log(error);
+      await transaction.rollback();
+      throw HttpResponse.unprocessableEntity('Erro ao salvar usuário!');
+    }
+  }
 
-  //     person.update(updatePersonDto);
+  async updateAddresses(id: number, updatePersonDto: UpdateUserDto) {
+    const transaction = await this.sequelize.transaction();
+    try {
+      const addresses = updatePersonDto.addresses.map((address) => {
+        if (!address.userId) {
+          address.userId = id;
+        }
+        return address;
+      });
 
-  //     await Promise.all(toSave);
-  //     await transaction.commit();
-  //     return true;
-  //   } catch (error) {
-  //     await transaction.rollback();
-  //     throw HttpResponse.unprocessableEntity('Erro ao atualizar usuário!');
-  //   }
-  // }
+      await this.addressesModel.bulkCreate(addresses, {
+        updateOnDuplicate: [
+          'street',
+          'zipcode',
+          'neighborhood',
+          'complement',
+          'city',
+          'state',
+          'country',
+          'updatedAt',
+        ],
+        transaction,
+      });
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+      await transaction.commit();
+      //TODO: Maybe find another way to get ids from bulkCreate
+      const updatedAddresses = await this.addressesModel.findAll({
+        where: { userId: id },
+      });
+
+      return updatedAddresses;
+    } catch (error) {
+      console.log(error);
+      await transaction.rollback();
+      throw HttpResponse.unprocessableEntity('Erro ao salvar endereços!');
+    }
+  }
+
+  async updateContacts(id: number, updatePersonDto: UpdateUserDto) {
+    const transaction = await this.sequelize.transaction();
+    try {
+      const contacts = updatePersonDto.contacts.map((contact) => {
+        if (!contact.userId) {
+          contact.userId = id;
+        }
+        return contact;
+      });
+
+      await this.contactsModel.bulkCreate(contacts, {
+        updateOnDuplicate: ['contactType', 'value', 'updatedAt'],
+        transaction,
+        returning: true,
+        hooks: true,
+      });
+
+      await transaction.commit();
+      //TODO: Maybe find another way to get ids from bulkCreate
+      const updatedContacts = await this.contactsModel.findAll({
+        where: { userId: id },
+      });
+
+      return updatedContacts;
+    } catch (error) {
+      console.log(error);
+      await transaction.rollback();
+      throw HttpResponse.unprocessableEntity('Erro ao salvar contatos!');
+    }
+  }
+  async changePassword(id: number, passwords: ChangePasswordDto) {
+    const { currentPassword, newPassword } = passwords;
+    try {
+      const user = await this.userModel.findOne({
+        where: { id },
+        attributes: ['id', 'password'],
+      });
+
+      if (!user || !compareSync(currentPassword, user.password)) {
+        throw HttpResponse.badRequest('Senha atual incorreta!');
+      }
+
+      await user.update({ password: newPassword });
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw HttpResponse.unprocessableEntity('Erro ao salvar nova senha!');
+    }
+  }
+
+  async removeAddress(id: number) {
+    try {
+      const address = await this.addressesModel.findByPk(id);
+      await address.destroy();
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw HttpResponse.unprocessableEntity('Erro ao excluir endereço!');
+    }
+  }
+
+  async removeContact(id: number) {
+    try {
+      const contact = await this.contactsModel.findByPk(id);
+      await contact.destroy();
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw HttpResponse.unprocessableEntity('Erro ao excluir contato!');
+    }
   }
 
   private removeDuplicateModule(duplicates): Array<any> {

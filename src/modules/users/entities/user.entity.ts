@@ -2,6 +2,7 @@ import {
   AllowNull,
   AutoIncrement,
   BeforeCreate,
+  BeforeUpdate,
   BelongsToMany,
   Column,
   CreatedAt,
@@ -107,7 +108,9 @@ export class User extends Model<IUser> {
   updatedAt: Date;
 
   @BeforeCreate
+  @BeforeUpdate
   static async hashPassword(instance: User) {
+    console.log('user', instance.password);
     instance.password = await hash(instance.password, 10);
   }
 }
