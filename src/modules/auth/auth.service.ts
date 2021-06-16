@@ -25,12 +25,12 @@ export class AuthService {
       return true;
     }
     //TODO: Send email
-    const resultEmail = await EmailController.sendEmail({
-      to: 'robertojf95@gmail.com',
-      subject: 'Test send email patters',
-      message: `teste message ${user.rememberToken}`,
-    });
-    console.log(resultEmail);
+    // const resultEmail = await EmailController.sendEmail({
+    //   to: 'robertojf95@gmail.com',
+    //   subject: 'Test send email patters',
+    //   message: `teste message ${user.rememberToken}`,
+    // });
+    // console.log(resultEmail);
     return true;
   }
 }

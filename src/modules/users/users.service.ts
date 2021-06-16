@@ -164,9 +164,9 @@ export class UsersService {
     };
   }
 
-  async requestPassword({ login }: RequestPasswordDto) {
+  async requestPassword({ email }: RequestPasswordDto) {
     const user = await this.userModel.findOne({
-      where: { login },
+      where: { email },
     });
     if (!user) {
       return null;
