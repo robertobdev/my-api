@@ -8,7 +8,6 @@ import {
 } from 'class-validator';
 import { User } from '../../modules/users/entities/user.entity';
 import { Op } from 'sequelize';
-import { Person } from 'src/modules/people/entities/person.entity';
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class LoginAlreadyExistConstraint
@@ -19,14 +18,15 @@ export class LoginAlreadyExistConstraint
   ) {}
 
   async validate(login: string, validationArguments: ValidationArguments) {
-    let { id } = validationArguments.object as Person;
+    let { id } = validationArguments.object as User;
     if (!id) {
       id = 0;
     }
     try {
       const user = await this.user.findOne({
-        where: { login, personId: { [Op.not]: id } },
+        where: { login, id: { [Op.not]: id } },
       });
+
       return !!!user;
     } catch (e) {
       return false;

@@ -12,6 +12,8 @@ module.exports = {
             title: 'ACL',
             router: '/acl',
             description: 'ACL',
+            submenus:
+              '{"menus":[{"title":"Criar","router":"register"},{"title":"Listar","router":"list"}]}',
             created_at: new Date(),
             updated_at: new Date(),
           },
@@ -20,6 +22,8 @@ module.exports = {
             title: 'Usuários',
             router: '/users',
             description: 'users',
+            submenus:
+              '{"menus":[{"title":"Criar","router":"register"},{"title":"Listar","router":"list"}]}',
             created_at: new Date(),
             updated_at: new Date(),
           },

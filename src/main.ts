@@ -7,10 +7,11 @@ import { CustomExceptionFilter } from './filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalPipes(new CustomValidationPipe());
   app.useGlobalFilters(new CustomExceptionFilter());
-
+  app.setGlobalPrefix('v1');
   const config = new DocumentBuilder()
     .setTitle('My Api')
     .setDescription(
@@ -21,7 +22,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('v1/swagger', app, document);
 
   await app.listen(3000);
 }

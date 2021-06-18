@@ -1,36 +1,44 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Request,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
-import {
-  ApiBody,
-  ApiCreatedResponse,
-  ApiBadRequestResponse,
-} from '@nestjs/swagger';
+import { ApiBody, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { RequestPasswordDto } from '../users/dto/request-password.dto';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post()
   @ApiBody({ type: LoginUserDto })
-  @ApiCreatedResponse({ description: 'Create a person' })
-  @ApiBadRequestResponse({
-    status: 422,
-    description: 'Error to create a person',
-  })
+  @HttpCode(200)
   async login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
   }
 
+  @Get('user')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  async getUserAuthorization(@Request() { user }) {
+    delete user.acl;
+    delete user.iat;
+    delete user.exp;
+    return user;
+  }
+
+  //TODO: Make test
   @Post('request-password')
   @ApiBody({ type: LoginUserDto })
-  @ApiCreatedResponse({ description: 'Create a person' })
-  @ApiBadRequestResponse({
-    status: 422,
-    description: 'Error to create a person',
-  })
   @HttpCode(200)
   async requestNewPassword(@Body() requestPasswordDto: RequestPasswordDto) {
     await this.authService.requestPassword(requestPasswordDto);

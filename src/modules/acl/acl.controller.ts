@@ -13,8 +13,9 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
+  ApiTags,
 } from '@nestjs/swagger';
-import { HttpResponse } from 'src/utils/http-response';
+import { HttpResponse } from '../../utils/http-response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Acl } from '../shared/decorators/acl.decorator';
 import { AclGuard } from '../shared/guards/acl.guard';
@@ -25,6 +26,7 @@ import { CreateAclDto } from './dto/create-acl.dto';
 @UseGuards(AclGuard)
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
+@ApiTags('ACL')
 export class AclController {
   constructor(private readonly aclService: AclService) {}
 
@@ -35,33 +37,33 @@ export class AclController {
     status: 422,
     description: 'Error to create a clt',
   })
-  @Acl('POST_USERS')
+  @Acl('POST_ACL')
   async create(@Body() createAclDto: CreateAclDto) {
     await this.aclService.create(createAclDto);
     return HttpResponse.created('ACL criada com sucesso!');
   }
 
-  @Get()
-  @Acl('GET_USERS')
-  findAll() {
-    return this.aclService.findAll({ limit: 0, offset: 10 });
+  @Get('/configurations')
+  @Acl('GET_ACL')
+  findRoleAndModules() {
+    return this.aclService.findRoleAndModules();
   }
 
   @Get(':id')
-  @Acl('GET_USERS')
+  @Acl('GET_ACL')
   findOne(@Param('id') id: string) {
     return this.aclService.findOne(+id);
   }
 
   @Patch(':id')
-  @Acl('UPDATE_USERS')
+  @Acl('UPDATE_ACL')
   async update(@Param('id') id: string, @Body() updateAclDto: CreateAclDto) {
     await this.aclService.update(+id, updateAclDto);
     return HttpResponse.ok('ACL atualizado com sucesso!');
   }
 
   @Delete(':id')
-  @Acl('DELETE_USERS')
+  @Acl('DELETE_ACL')
   async remove(@Param('id') id: string) {
     await this.aclService.remove(+id);
     return HttpResponse.ok('ACL excluida com sucesso!');

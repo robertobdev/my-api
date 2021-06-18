@@ -44,6 +44,11 @@ export class Modules extends Model<Modules> {
   @Field()
   description: string;
 
+  @AllowNull(true)
+  @Column(DataType.JSON)
+  @Field()
+  submenus: string;
+
   @CreatedAt
   @Column({ type: DataType.DATE, field: 'created_at' })
   @Field()

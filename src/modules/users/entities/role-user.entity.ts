@@ -7,7 +7,7 @@ import {
   CreatedAt,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Role } from './role.entity';
+import { Role } from '../../acl/entities/role.entity';
 import { User } from './user.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()

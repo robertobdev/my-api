@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PeopleModule } from './modules/people/people.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
@@ -31,7 +30,6 @@ const ENV = process.env.NODE_ENV;
       autoLoadModels: true,
       synchronize: false,
     }),
-    PeopleModule,
     UsersModule,
     AuthModule,
     AclModule,
